@@ -1,0 +1,93 @@
+name: One-shot highlight RomFS folder warning
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  update-release:
+    if: github.event.head_commit.message == 'One-shot highlight RomFS folder warning'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Highlight Ghost Enemies RomFS folder warning
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python - <<'PY'
+          import json
+          import subprocess
+
+          repo = 'Dollars-Archive/eve-ghost-enemies-kr-patch'
+          release_id = '379109959'
+
+          data = json.loads(subprocess.check_output(
+              ['gh', 'api', f'repos/{repo}/releases/{release_id}'], text=True
+          ))
+          body = data.get('body') or ''
+
+          old = '''RomFS 언팩 시 생성되는 폴더
+
+EVE ghost enemies를 롬포즈로 언팩하면 아래와 같이 2개의 타이틀 폴더가 생성됩니다.
+
+01007BE0160D6000
+└─ EVE Ghost Enemies 본편
+
+01007BE0160D6001
+└─ DESIRE remaster 특전
+
+이는 언팩 오류가 아니라 정상적인 구조입니다.
+
+한글패치를 적용할 때는 EVE Ghost Enemies 본편인 01007BE0160D6000 폴더를 사용하면 됩니다.
+
+01007BE0160D6001은 업데이트 데이터가 아니라, EVE Ghost Enemies에 수록된 DESIRE remaster 특전용 별도 프로그램입니다.'''
+
+          new = '''> [!WARNING]
+> ### RomFS 언팩 시 생성되는 2개의 타이틀 폴더
+>
+> EVE ghost enemies를 RomForge로 언팩하면 아래와 같이 **2개의 타이틀 폴더가 생성됩니다.**
+>
+> ```text
+> 01007BE0160D6000
+> └─ EVE Ghost Enemies 본편
+>
+> 01007BE0160D6001
+> └─ DESIRE remaster 특전
+> ```
+>
+> **이는 언팩 오류가 아니라 정상적인 구조입니다.**
+>
+> 한글패치를 적용할 때는 반드시 **EVE Ghost Enemies 본편인 `01007BE0160D6000` 폴더**를 사용해 주세요.
+>
+> `01007BE0160D6001`은 업데이트 데이터가 아니라, EVE Ghost Enemies에 수록된 **DESIRE remaster 특전용 별도 프로그램**입니다.'''
+
+          if old not in body:
+              raise SystemExit('Target RomFS folder section was not found; release left unchanged.')
+
+          new_body = body.replace(old, new, 1)
+          with open('payload.json', 'w', encoding='utf-8') as f:
+              json.dump({'body': new_body}, f, ensure_ascii=False)
+
+          subprocess.run(
+              ['gh', 'api', '--method', 'PATCH', f'repos/{repo}/releases/{release_id}', '--input', 'payload.json'],
+              check=True,
+          )
+
+          verify = json.loads(subprocess.check_output(
+              ['gh', 'api', f'repos/{repo}/releases/{release_id}'], text=True
+          )).get('body') or ''
+          required = [
+              '> [!WARNING]',
+              '### RomFS 언팩 시 생성되는 2개의 타이틀 폴더',
+              '`01007BE0160D6000` 폴더',
+              '`01007BE0160D6001`은 업데이트 데이터가 아니라',
+          ]
+          missing = [x for x in required if x not in verify]
+          if missing:
+              raise SystemExit('Verification failed: ' + repr(missing))
+
+          print('Verified: RomFS two-folder notice is now a WARNING callout.')
+          PY
