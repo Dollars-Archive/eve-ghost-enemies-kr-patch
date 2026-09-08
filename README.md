@@ -59,6 +59,12 @@ Nintendo Switch판 **EVE ghost enemies** 비공식 한국어 패치입니다.
 
 옵션 화면도 한글화 추가 했습니다
 
+### 엔딩 후 특전
+
+<img width="1079" height="602" alt="스크린샷 2026-09-08 204155" src="https://github.com/user-attachments/assets/3f4bcc35-84be-423a-bc3b-6d76c20d3770" />
+
+스위치판은 엔딩 후 특전으로 'Desire Remaster' 버전이 해금되지만, 해당 작품은 한국 패치 작업 하지 않았습니다.
+
 ## 다운로드
 
 최신 한국어 패치는 [Releases](https://github.com/Dollars-Archive/eve-ghost-enemies-kr-patch/releases)에서 받을 수 있습니다.
