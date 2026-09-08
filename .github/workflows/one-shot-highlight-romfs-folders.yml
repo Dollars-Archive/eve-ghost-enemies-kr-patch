@@ -1,4 +1,4 @@
-name: One-shot apply RomFS folder warning
+name: One-shot apply RomFS folder warning v2
 
 on:
   push:
@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   update-release:
-    if: github.event.head_commit.message == 'One-shot apply RomFS folder warning'
+    if: github.event.head_commit.message == 'One-shot apply RomFS folder warning v2'
     runs-on: ubuntu-latest
     steps:
       - name: Update release body
@@ -22,7 +22,7 @@ jobs:
           set -euo pipefail
           BODY="$(gh api repos/Dollars-Archive/eve-ghost-enemies-kr-patch/releases/379109959 --jq '.body // ""')"
           export BODY
-          python -c "import os,base64,json; body=os.environ['BODY']; old=base64.b64decode(os.environ['OLD_B64']).decode(); new=base64.b64decode(os.environ['NEW_B64']).decode(); assert old in body, 'target block not found'; open('payload.json','w',encoding='utf-8').write(json.dumps({'body':body.replace(old,new,1)},ensure_ascii=False))"
+          python -c "import os,base64,json; body=os.environ['BODY'].replace('\\r\\n','\\n').replace('\\r','\\n'); old=base64.b64decode(os.environ['OLD_B64']).decode(); new=base64.b64decode(os.environ['NEW_B64']).decode(); assert old in body, 'target block not found'; open('payload.json','w',encoding='utf-8').write(json.dumps({'body':body.replace(old,new,1)},ensure_ascii=False))"
           gh api --method PATCH repos/Dollars-Archive/eve-ghost-enemies-kr-patch/releases/379109959 --input payload.json
           VERIFY="$(gh api repos/Dollars-Archive/eve-ghost-enemies-kr-patch/releases/379109959 --jq '.body // ""')"
           printf '%s' "$VERIFY" | grep -F '> [!WARNING]'
