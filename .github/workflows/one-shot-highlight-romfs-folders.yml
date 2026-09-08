@@ -1,4 +1,4 @@
-name: One-shot highlight RomFS folder warning
+name: One-shot apply RomFS folder warning
 
 on:
   push:
@@ -10,84 +10,20 @@ permissions:
 
 jobs:
   update-release:
-    if: github.event.head_commit.message == 'One-shot highlight RomFS folder warning'
+    if: github.event.head_commit.message == 'One-shot apply RomFS folder warning'
     runs-on: ubuntu-latest
     steps:
-      - name: Highlight Ghost Enemies RomFS folder warning
+      - name: Update release body
         env:
           GH_TOKEN: ${{ github.token }}
+          OLD_B64: Um9tRlMg7Ja47YypIOyLnCDsg53shLHrkJjripQg7Y+0642UCgpFVkUgZ2hvc3QgZW5lbWllc+ulvCDroaztj6zspojroZwg7Ja47Yyp7ZWY66m0IOyVhOuemOyZgCDqsJnsnbQgMuqwnOydmCDtg4DsnbTti4Ag7Y+0642U6rCAIOyDneyEseuQqeuLiOuLpC4KCjAxMDA3QkUwMTYwRDYwMDAK4pSU4pSAIEVWRSBHaG9zdCBFbmVtaWVzIOuzuO2OuAoKMDEwMDdCRTAxNjBENjAwMQrilJTilIAgREVTSVJFIHJlbWFzdGVyIO2KueyghAoK7J2064qUIOyWuO2MqSDsmKTrpZjqsIAg7JWE64uI6528IOygleyDgeyggeyduCDqtazsobDsnoXri4jri6QuCgrtlZzquIDtjKjsuZjrpbwg7KCB7Jqp7ZWgIOuVjOuKlCBFVkUgR2hvc3QgRW5lbWllcyDrs7jtjrjsnbggMDEwMDdCRTAxNjBENjAwMCDtj7TrjZTrpbwg7IKs7Jqp7ZWY66m0IOuQqeuLiOuLpC4KCjAxMDA3QkUwMTYwRDYwMDHsnYAg7JeF642w7J207Yq4IOuNsOydtO2EsOqwgCDslYTri4jrnbwsIEVWRSBHaG9zdCBFbmVtaWVz7JeQIOyImOuhneuQnCBERVNJUkUgcmVtYXN0ZXIg7Yq57KCE7JqpIOuzhOuPhCDtlITroZzqt7jrnqjsnoXri4jri6Qu
+          NEW_B64: PiBbIVdBUk5JTkddCj4gIyMjIFJvbUZTIOyWuO2MqSDsi5wg7IOd7ISx65CY64qUIDLqsJzsnZgg7YOA7J207YuAIO2PtOuNlAo+Cj4gRVZFIGdob3N0IGVuZW1pZXPrpbwgUm9tRm9yZ2XroZwg7Ja47Yyp7ZWY66m0IOyVhOuemOyZgCDqsJnsnbQgKioy6rCc7J2YIO2DgOydtO2LgCDtj7TrjZTqsIAg7IOd7ISx65Cp64uI64ukLioqCj4KPiBgYGB0ZXh0Cj4gMDEwMDdCRTAxNjBENjAwMAo+IOKUlOKUgCBFVkUgR2hvc3QgRW5lbWllcyDrs7jtjrgKPgo+IDAxMDA3QkUwMTYwRDYwMDEKPiDilJTilIAgREVTSVJFIHJlbWFzdGVyIO2KueyghAo+IGBgYAo+Cj4gKirsnbTripQg7Ja47YypIOyYpOulmOqwgCDslYTri4jrnbwg7KCV7IOB7KCB7J24IOq1rOyhsOyeheuLiOuLpC4qKgo+Cj4g7ZWc6riA7Yyo7LmY66W8IOyggeyaqe2VoCDrlYzripQg67CY65Oc7IucICoqRVZFIEdob3N0IEVuZW1pZXMg67O47Y647J24IGAwMTAwN0JFMDE2MEQ2MDAwYCDtj7TrjZQqKuulvCDsgqzsmqntlbQg7KO87IS47JqULgo+Cj4gYDAxMDA3QkUwMTYwRDYwMDFg7J2AIOyXheuNsOydtO2KuCDrjbDsnbTthLDqsIAg7JWE64uI6528LCBFVkUgR2hvc3QgRW5lbWllc+yXkCDsiJjroZ3rkJwgKipERVNJUkUgcmVtYXN0ZXIg7Yq57KCE7JqpIOuzhOuPhCDtlITroZzqt7jrnqgqKuyeheuLiOuLpC4=
         run: |
-          python - <<'PY'
-          import json
-          import subprocess
-
-          repo = 'Dollars-Archive/eve-ghost-enemies-kr-patch'
-          release_id = '379109959'
-
-          data = json.loads(subprocess.check_output(
-              ['gh', 'api', f'repos/{repo}/releases/{release_id}'], text=True
-          ))
-          body = data.get('body') or ''
-
-          old = '''RomFS 언팩 시 생성되는 폴더
-
-EVE ghost enemies를 롬포즈로 언팩하면 아래와 같이 2개의 타이틀 폴더가 생성됩니다.
-
-01007BE0160D6000
-└─ EVE Ghost Enemies 본편
-
-01007BE0160D6001
-└─ DESIRE remaster 특전
-
-이는 언팩 오류가 아니라 정상적인 구조입니다.
-
-한글패치를 적용할 때는 EVE Ghost Enemies 본편인 01007BE0160D6000 폴더를 사용하면 됩니다.
-
-01007BE0160D6001은 업데이트 데이터가 아니라, EVE Ghost Enemies에 수록된 DESIRE remaster 특전용 별도 프로그램입니다.'''
-
-          new = '''> [!WARNING]
-> ### RomFS 언팩 시 생성되는 2개의 타이틀 폴더
->
-> EVE ghost enemies를 RomForge로 언팩하면 아래와 같이 **2개의 타이틀 폴더가 생성됩니다.**
->
-> ```text
-> 01007BE0160D6000
-> └─ EVE Ghost Enemies 본편
->
-> 01007BE0160D6001
-> └─ DESIRE remaster 특전
-> ```
->
-> **이는 언팩 오류가 아니라 정상적인 구조입니다.**
->
-> 한글패치를 적용할 때는 반드시 **EVE Ghost Enemies 본편인 `01007BE0160D6000` 폴더**를 사용해 주세요.
->
-> `01007BE0160D6001`은 업데이트 데이터가 아니라, EVE Ghost Enemies에 수록된 **DESIRE remaster 특전용 별도 프로그램**입니다.'''
-
-          if old not in body:
-              raise SystemExit('Target RomFS folder section was not found; release left unchanged.')
-
-          new_body = body.replace(old, new, 1)
-          with open('payload.json', 'w', encoding='utf-8') as f:
-              json.dump({'body': new_body}, f, ensure_ascii=False)
-
-          subprocess.run(
-              ['gh', 'api', '--method', 'PATCH', f'repos/{repo}/releases/{release_id}', '--input', 'payload.json'],
-              check=True,
-          )
-
-          verify = json.loads(subprocess.check_output(
-              ['gh', 'api', f'repos/{repo}/releases/{release_id}'], text=True
-          )).get('body') or ''
-          required = [
-              '> [!WARNING]',
-              '### RomFS 언팩 시 생성되는 2개의 타이틀 폴더',
-              '`01007BE0160D6000` 폴더',
-              '`01007BE0160D6001`은 업데이트 데이터가 아니라',
-          ]
-          missing = [x for x in required if x not in verify]
-          if missing:
-              raise SystemExit('Verification failed: ' + repr(missing))
-
-          print('Verified: RomFS two-folder notice is now a WARNING callout.')
-          PY
+          set -euo pipefail
+          BODY="$(gh api repos/Dollars-Archive/eve-ghost-enemies-kr-patch/releases/379109959 --jq '.body // ""')"
+          export BODY
+          python -c "import os,base64,json; body=os.environ['BODY']; old=base64.b64decode(os.environ['OLD_B64']).decode(); new=base64.b64decode(os.environ['NEW_B64']).decode(); assert old in body, 'target block not found'; open('payload.json','w',encoding='utf-8').write(json.dumps({'body':body.replace(old,new,1)},ensure_ascii=False))"
+          gh api --method PATCH repos/Dollars-Archive/eve-ghost-enemies-kr-patch/releases/379109959 --input payload.json
+          VERIFY="$(gh api repos/Dollars-Archive/eve-ghost-enemies-kr-patch/releases/379109959 --jq '.body // ""')"
+          printf '%s' "$VERIFY" | grep -F '> [!WARNING]'
+          printf '%s' "$VERIFY" | grep -F 'RomFS 언팩 시 생성되는 2개의 타이틀 폴더'
