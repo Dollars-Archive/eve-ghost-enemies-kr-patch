@@ -19,9 +19,9 @@ Nintendo Switch판 **EVE ghost enemies** 비공식 한국어 패치입니다.
 
 스토리 대사 및 이벤트 텍스트의 **한글화 및 검수를 완료했습니다.**
 
-<img width="1081" height="602" alt="스크린샷 2026-09-08 203611" src="https://github.com/user-attachments/assets/069fd5e2-0a5d-445a-a42a-c03eab7e2a74" />
+<img src="https://github.com/user-attachments/assets/069fd5e2-0a5d-445a-a42a-c03eab7e2a74" width="80%" alt="스크린샷 2026-09-08 203611" />
 
-<img width="1077" height="601" alt="스크린샷 2026-09-08 203336" src="https://github.com/user-attachments/assets/b3479047-ebfa-442a-8646-c5ee4528f5f6" />
+<img src="https://github.com/user-attachments/assets/b3479047-ebfa-442a-8646-c5ee4528f5f6" width="80%" alt="스크린샷 2026-09-08 203336" />
 
 ### 조사·행동 선택 메뉴
 
@@ -29,29 +29,29 @@ Nintendo Switch판 **EVE ghost enemies** 비공식 한국어 패치입니다.
 
 일부 선택지는 원본 이미지에 포함된 일본어가 함께 표시될 수 있습니다.
 
-<img width="1077" height="602" alt="스크린샷 2026-09-08 202947" src="https://github.com/user-attachments/assets/03046d21-54d7-438a-bf66-a283d3585545" />
+<img src="https://github.com/user-attachments/assets/03046d21-54d7-438a-bf66-a283d3585545" width="80%" alt="스크린샷 2026-09-08 202947" />
 
-<img width="1075" height="603" alt="스크린샷 2026-09-08 203053" src="https://github.com/user-attachments/assets/ab64fcc9-4519-47df-8aa6-21417adf67dc" />
+<img src="https://github.com/user-attachments/assets/ab64fcc9-4519-47df-8aa6-21417adf67dc" width="80%" alt="스크린샷 2026-09-08 203053" />
 
 ### 타이틀 화면
 
 타이틀 메뉴를 한글화했습니다. (해당 스크린샷은 엔딩 후 나오는 타이틀 화면입니다)
 
-<img width="1079" height="602" alt="스크린샷 2026-09-08 202746" src="https://github.com/user-attachments/assets/7a13a019-3be5-4e06-8937-eb9c356a0582" />
+<img src="https://github.com/user-attachments/assets/7a13a019-3be5-4e06-8937-eb9c356a0582" width="80%" alt="스크린샷 2026-09-08 202746" />
 
 ### 게임 시작 경고문
 
 게임 시작 시 표시되는 주의·경고문을 한글화했습니다.
 
-<img width="1086" height="599" alt="image" src="https://github.com/user-attachments/assets/0821e148-b069-4649-b0ef-d22153fe9aa8" />
+<img src="https://github.com/user-attachments/assets/0821e148-b069-4649-b0ef-d22153fe9aa8" width="80%" alt="image" />
 
 ### 지도 화면
 
 지도에서 표시되는 장소명과 관련 화면을 한글화했습니다.
 
-<img width="1082" height="608" alt="스크린샷 2026-09-08 202823" src="https://github.com/user-attachments/assets/8af7c689-6021-47a2-b85b-a58ce5b12bca" />
+<img src="https://github.com/user-attachments/assets/8af7c689-6021-47a2-b85b-a58ce5b12bca" width="80%" alt="스크린샷 2026-09-08 202823" />
 
-<img width="1080" height="599" alt="스크린샷 2026-09-08 202858" src="https://github.com/user-attachments/assets/2e60b2a5-2f3a-4712-9c78-5ead3d6da781" />
+<img src="https://github.com/user-attachments/assets/2e60b2a5-2f3a-4712-9c78-5ead3d6da781" width="80%" alt="스크린샷 2026-09-08 202858" />
 
 ### 옵션 화면
 
