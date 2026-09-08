@@ -57,7 +57,11 @@ Nintendo Switch판 **EVE ghost enemies** 비공식 한국어 패치입니다.
 
 ### 엔딩 후 특전
 
->스위치판은 엔딩 후 특전으로 'Desire Remaster' 버전이 해금되지만, 해당 작품은 한글 패치 작업 하지 않았습니다. (예정 없습니다)
+> [!NOTE]
+> **DESIRE remaster 관련 안내**  
+> Nintendo Switch판에서는 엔딩 후 특전으로 **`DESIRE remaster`**가 해금됩니다.<br>
+> 본 한국어 패치의 지원 범위는 **`EVE ghost enemies` 본편**이며, `DESIRE remaster`는 한글 패치 대상에 포함되지 않습니다.<br>
+> **현재 `DESIRE remaster`의 별도 한국어화 계획은 없습니다.**
 
 <img src="https://github.com/user-attachments/assets/3f4bcc35-84be-423a-bc3b-6d76c20d3770" width="80%" alt="스크린샷 2026-09-08 204155" />
 
