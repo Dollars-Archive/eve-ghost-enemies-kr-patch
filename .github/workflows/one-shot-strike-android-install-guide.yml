@@ -1,0 +1,54 @@
+name: One-shot strike Android install guide
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  update-release:
+    if: github.event.head_commit.message == 'One-shot strike Android install guide'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Mark Android installation guide as temporarily inactive
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh api repos/${GITHUB_REPOSITORY}/releases/379109959 > release.json
+          python - <<'PY'
+          import json
+          with open('release.json', encoding='utf-8') as f:
+              r = json.load(f)
+          body = (r.get('body') or '').replace('\r\n','\n').replace('\r','\n')
+          start_text = '**Eden Android Nightly 사용을 권장합니다.**'
+          end_text = 'Android 11 이상에서는 직접 경로에 복사하는 것보다 Eden의 **Add-ons 설치 기능** 사용을 권장합니다.'
+          start = body.index(start_text)
+          end = body.index(end_text, start) + len(end_text)
+          replacement = '''<!-- ANDROID_INSTALL_GUIDE_PAUSED_START -->
+> [!CAUTION]
+> **아래 Android 에뮬레이터 설치 안내는 현재 사용 중지 상태입니다.**
+> 호환성 문제가 해결되면 다시 안내할 예정이며, 아래 내용은 기존 설치 방법 보존용으로 남겨둡니다.
+
+~~**Eden Android Nightly 사용을 권장합니다.**~~
+
+~~패치 완료 후 생성된 `EVE-Ghost-Enemies-KR-v1.1.1-Switch-Android` 폴더를 사용합니다.~~
+
+~~게임 속성 → `Add-ons` → 설치 또는 `+` → `Mod`에서 해당 폴더를 선택합니다.~~
+
+~~게임 실행 중 튕김이나 프리징이 발생하면 **릴리즈에 함께 첨부한 Custom Settings for EVE.zip (Android용 Eden 설정 파일) `01007BE0160D6000.ini`를 적용한 뒤 다시 실행**해 주세요.~~
+
+~~Android 11 이상에서는 직접 경로에 복사하는 것보다 Eden의 **Add-ons 설치 기능** 사용을 권장합니다.~~
+<!-- ANDROID_INSTALL_GUIDE_PAUSED_END -->'''
+          body = body[:start] + replacement + body[end:]
+          with open('payload.json','w',encoding='utf-8') as f:
+              json.dump({'body': body}, f, ensure_ascii=False)
+          PY
+          gh api --method PATCH repos/${GITHUB_REPOSITORY}/releases/379109959 --input payload.json
+          VERIFY="$(gh api repos/${GITHUB_REPOSITORY}/releases/379109959 --jq '.body // ""')"
+          printf '%s' "$VERIFY" | grep -F 'ANDROID_INSTALL_GUIDE_PAUSED_START'
+          printf '%s' "$VERIFY" | grep -F '아래 Android 에뮬레이터 설치 안내는 현재 사용 중지 상태입니다.'
+          printf '%s' "$VERIFY" | grep -F '~~패치 완료 후 생성된 `EVE-Ghost-Enemies-KR-v1.1.1-Switch-Android` 폴더를 사용합니다.~~'
