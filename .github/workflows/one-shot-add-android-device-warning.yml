@@ -1,0 +1,41 @@
+name: One-shot add Android device warning
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  update-release:
+    if: github.event.head_commit.message == 'One-shot add Android device warning'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add Android device warning to v1.1.0 release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          BODY="$(gh api repos/${GITHUB_REPOSITORY}/releases/379109959 --jq '.body // ""')"
+          export BODY
+          python - <<'PY'
+          import os, json
+          body = os.environ['BODY'].replace('\r\n','\n').replace('\r','\n')
+          heading = '### Eden Android Nightly\n\n'
+          warning = '''> [!WARNING]\n> ### Android판 실행 관련 중요 안내\n> 현재 Android 환경은 **Lenovo Legion Y700 3세대에서만 게임 실행을 확인**했습니다.\n> 그 외 Android 기기에서는 **게임이 실행되지 않는 문제가 있어 현재 원인을 조사 중**입니다.\n>\n> **Android에서 플레이하실 분들은 현재 버전 적용을 기다려 주시고, 수정된 다음 패치가 배포된 뒤 이용해 주세요.**\n\n'''
+          if '### Android판 실행 관련 중요 안내' in body:
+              raise SystemExit('warning already exists')
+          if heading not in body:
+              raise SystemExit('Android heading not found')
+          body = body.replace(heading, heading + warning, 1)
+          with open('payload.json','w',encoding='utf-8') as f:
+              json.dump({'body': body}, f, ensure_ascii=False)
+          PY
+          gh api --method PATCH repos/${GITHUB_REPOSITORY}/releases/379109959 --input payload.json
+          VERIFY="$(gh api repos/${GITHUB_REPOSITORY}/releases/379109959 --jq '.body // ""')"
+          printf '%s' "$VERIFY" | grep -F '### Android판 실행 관련 중요 안내'
+          printf '%s' "$VERIFY" | grep -F 'Lenovo Legion Y700 3세대에서만 게임 실행을 확인'
+          printf '%s' "$VERIFY" | grep -F '게임이 실행되지 않는 문제가 있어 현재 원인을 조사 중'
+          printf '%s' "$VERIFY" | grep -F '수정된 다음 패치가 배포된 뒤 이용해 주세요'
