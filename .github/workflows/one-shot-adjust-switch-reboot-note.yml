@@ -10,50 +10,22 @@ permissions:
 
 jobs:
   update-release:
-    if: github.event.head_commit.message == 'One-shot adjust Switch reboot note'
+    if: github.event.head_commit.message == 'One-shot adjust Switch reboot note v2'
     runs-on: ubuntu-latest
     steps:
       - name: Update Switch reboot guidance in v1.1.0 release
         env:
           GH_TOKEN: ${{ github.token }}
+          OLD_B64: IyMjIDPri6jqs4Qg4oCUIOyerOu2gO2MhQoK65GQIO2PtOuNlOulvCDrqqjrkZAg67O17IKs7ZaI7Jy866m0IFNE7Lm065Oc66W8IFN3aXRjaOyXkCDrhKPqs6AgKirrs7jssrTrpbwg7J6s67aA7YyFKirtlanri4jri6QuCg==
+          NEW_B64: IyMjIDPri6jqs4Qg4oCUIO2VnOq4gO2MqOy5mCDsoIHsmqkg7Jes67aAIO2ZleyduAoK65GQIO2PtOuNlOulvCDrqqjrkZAg67O17IKs7ZaI7Jy866m0ICoq66i87KCAIOyerOu2gO2Mhe2VmOyngCDrp5Dqs6Ag6rKM7J6E7J2EIOyLpO2Wie2VtOyEnCDtlZzquIDtjKjsuZjqsIAg7KCB7Jqp65CQ64qU7KeAIO2ZleyduCoq7ZW0IOyjvOyEuOyalC4KCuygleyDgeyggeycvOuhnCDtlZzquIDsnbQg7ZGc7Iuc65Cc64uk66m0ICoq7LaU6rCAIOyerOu2gO2MhSDsl4bsnbQg6re464yA66GcIOyCrOyaqe2VmOuptCDrkKnri4jri6QuKioKCj4gWyFUSVBdCj4g7ZWc6riA7Yyo7LmY6rCAIOyggeyaqeuQmOyngCDslYrqsbDrgpgg67OA6rK9IOuCtOyaqeydtCDrsJjsmIHrkJjsp4Ag7JWK64qUIOqyveyasOyXkOunjCAqKlN3aXRjaCDrs7jssrTrpbwg7J6s67aA7YyF7ZWcIOuSpCDri6Tsi5wg7Iuk7ZaJKirtlbQg7KO87IS47JqULgo=
         run: |
-          python - <<'PY'
-          import json, subprocess
-
-          repo = 'Dollars-Archive/eve-ghost-enemies-kr-patch'
-          release_id = '379109959'
-          old = '''### 3단계 — 재부팅
-
-두 폴더를 모두 복사했으면 SD카드를 Switch에 넣고 **본체를 재부팅**합니다.
-'''
-          new = '''### 3단계 — 한글패치 적용 여부 확인
-
-두 폴더를 모두 복사했으면 **먼저 재부팅하지 말고 게임을 실행해서 한글패치가 적용됐는지 확인**해 주세요.
-
-정상적으로 한글이 표시된다면 **추가 재부팅 없이 그대로 사용하면 됩니다.**
-
-> [!TIP]
-> 한글패치가 적용되지 않거나 변경 내용이 반영되지 않는 경우에만 **Switch 본체를 재부팅한 뒤 다시 실행**해 주세요.
-'''
-
-          data = json.loads(subprocess.check_output(['gh','api',f'repos/{repo}/releases/{release_id}'], text=True))
-          body = (data.get('body') or '').replace('\r\n','\n').replace('\r','\n')
-          if old not in body:
-              raise SystemExit('target block not found')
-          body = body.replace(old, new, 1)
-          with open('payload.json','w',encoding='utf-8') as f:
-              json.dump({'body': body}, f, ensure_ascii=False)
-          subprocess.run(['gh','api','--method','PATCH',f'repos/{repo}/releases/{release_id}','--input','payload.json'], check=True)
-
-          verify = json.loads(subprocess.check_output(['gh','api',f'repos/{repo}/releases/{release_id}'], text=True)).get('body') or ''
-          required = [
-              '### 3단계 — 한글패치 적용 여부 확인',
-              '먼저 재부팅하지 말고 게임을 실행해서 한글패치가 적용됐는지 확인',
-              '추가 재부팅 없이 그대로 사용하면 됩니다',
-              '적용되지 않거나 변경 내용이 반영되지 않는 경우에만 **Switch 본체를 재부팅한 뒤 다시 실행**',
-          ]
-          missing = [x for x in required if x not in verify]
-          if missing:
-              raise SystemExit('verification failed: ' + repr(missing))
-          print('Verified: Switch reboot guidance updated.')
-          PY
+          set -euo pipefail
+          BODY="$(gh api repos/${GITHUB_REPOSITORY}/releases/379109959 --jq '.body // ""')"
+          export BODY
+          python -c "import os,base64,json; body=os.environ['BODY'].replace('\\r\\n','\\n').replace('\\r','\\n'); old=base64.b64decode(os.environ['OLD_B64']).decode(); new=base64.b64decode(os.environ['NEW_B64']).decode(); assert old in body, 'target block not found'; open('payload.json','w',encoding='utf-8').write(json.dumps({'body':body.replace(old,new,1)},ensure_ascii=False))"
+          gh api --method PATCH repos/${GITHUB_REPOSITORY}/releases/379109959 --input payload.json
+          VERIFY="$(gh api repos/${GITHUB_REPOSITORY}/releases/379109959 --jq '.body // ""')"
+          printf '%s' "$VERIFY" | grep -F '### 3단계 — 한글패치 적용 여부 확인'
+          printf '%s' "$VERIFY" | grep -F '먼저 재부팅하지 말고 게임을 실행해서 한글패치가 적용됐는지 확인'
+          printf '%s' "$VERIFY" | grep -F '추가 재부팅 없이 그대로 사용하면 됩니다'
+          printf '%s' "$VERIFY" | grep -F '경우에만 **Switch 본체를 재부팅한 뒤 다시 실행**'
