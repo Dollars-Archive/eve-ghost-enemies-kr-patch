@@ -1,0 +1,21 @@
+name: Auto-assign new issues
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  issues: write
+
+jobs:
+  assign-owner:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Assign new issue to Dollars-Archive
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          printf '{"assignees":["Dollars-Archive"]}' | \
+            gh api --method POST "repos/${REPOSITORY}/issues/${ISSUE_NUMBER}/assignees" --input -
