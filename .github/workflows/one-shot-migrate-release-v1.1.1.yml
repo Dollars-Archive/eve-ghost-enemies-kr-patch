@@ -1,0 +1,71 @@
+name: One-shot migrate release v1.1.1
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  migrate-release:
+    if: github.event.head_commit.message == 'One-shot migrate release v1.1.1'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Migrate v1.1.0 release to v1.1.1
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          REPO="${GITHUB_REPOSITORY}"
+          RELEASE_ID="379109959"
+          OLD_TAG="v1.1.0"
+          NEW_TAG="v1.1.1"
+          TAG_SHA="bc07acbc18cc51c01d0caf077317d4dd4adf91b0"
+
+          # Create the new tag if it does not already exist.
+          if ! gh api "repos/${REPO}/git/ref/tags/${NEW_TAG}" >/dev/null 2>&1; then
+            gh api --method POST "repos/${REPO}/git/refs" \
+              -f ref="refs/tags/${NEW_TAG}" \
+              -f sha="${TAG_SHA}"
+          fi
+
+          # Update every visible v1.1.0 reference in the release name/body.
+          gh api "repos/${REPO}/releases/${RELEASE_ID}" > release.json
+          python - <<'PY'
+          import json
+          with open('release.json', encoding='utf-8') as f:
+              r = json.load(f)
+          body = (r.get('body') or '').replace('\r\n','\n').replace('\r','\n')
+          name = r.get('name') or ''
+          body = body.replace('1.1.0', '1.1.1')
+          name = name.replace('1.1.0', '1.1.1')
+          payload = {
+              'tag_name': 'v1.1.1',
+              'name': name,
+              'body': body,
+          }
+          with open('payload.json','w',encoding='utf-8') as f:
+              json.dump(payload, f, ensure_ascii=False)
+          PY
+
+          gh api --method PATCH "repos/${REPO}/releases/${RELEASE_ID}" --input payload.json
+
+          # Remove the obsolete old tag after the release has moved.
+          if gh api "repos/${REPO}/git/ref/tags/${OLD_TAG}" >/dev/null 2>&1; then
+            gh api --method DELETE "repos/${REPO}/git/refs/tags/${OLD_TAG}"
+          fi
+
+          # Verify the release is now fully v1.1.1.
+          gh api "repos/${REPO}/releases/${RELEASE_ID}" > verify.json
+          python - <<'PY'
+          import json
+          with open('verify.json', encoding='utf-8') as f:
+              r = json.load(f)
+          assert r['tag_name'] == 'v1.1.1', r['tag_name']
+          assert '1.1.0' not in (r.get('name') or ''), r.get('name')
+          assert '1.1.0' not in (r.get('body') or ''), 'old version remains in body'
+          assert 'EVE-Ghost-Enemies-KR-v1.1.1-Patcher' in (r.get('body') or '')
+          print('Verified release:', r['tag_name'], r.get('name'))
+          PY
