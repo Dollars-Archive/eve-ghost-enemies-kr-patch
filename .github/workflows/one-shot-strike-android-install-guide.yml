@@ -10,45 +10,19 @@ permissions:
 
 jobs:
   update-release:
-    if: github.event.head_commit.message == 'One-shot strike Android install guide'
+    if: github.event.head_commit.message == 'One-shot strike Android install guide v2'
     runs-on: ubuntu-latest
     steps:
       - name: Mark Android installation guide as temporarily inactive
         env:
           GH_TOKEN: ${{ github.token }}
+          NEW_B64: PCEtLSBBTkRST0lEX0lOU1RBTExfR1VJREVfUEFVU0VEX1NUQVJUIC0tPgo+IFshQ0FVVElPTl0KPiAqKuyVhOuemCBBbmRyb2lkIOyXkOuurOugiOydtO2EsCDshKTsuZgg7JWI64K064qUIO2YhOyerCDsgqzsmqkg7KSR7KeAIOyDge2DnOyeheuLiOuLpC4qKgo+IO2YuO2ZmOyEsSDrrLjsoJzqsIAg7ZW06rKw65CY66m0IOuLpOyLnCDslYjrgrTtlaAg7JiI7KCV7J2066mwLCDslYTrnpgg64K07Jqp7J2AIOq4sOyhtCDshKTsuZgg67Cp67KVIOuztOyhtOyaqeycvOuhnCDrgqjqsqjrkaHri4jri6QuCgp+fioqRWRlbiBBbmRyb2lkIE5pZ2h0bHkg7IKs7Jqp7J2EIOq2jOyepe2VqeuLiOuLpC4qKn5+Cgp+fu2MqOy5mCDsmYTro4wg7ZuEIOyDneyEseuQnCBgRVZFLUdob3N0LUVuZW1pZXMtS1ItdjEuMS4xLVN3aXRjaC1BbmRyb2lkYCDtj7TrjZTrpbwg7IKs7Jqp7ZWp64uI64ukLn5+Cgp+fuqyjOyehCDsho3shLEg4oaSIGBBZGQtb25zYCDihpIg7ISk7LmYIOuYkOuKlCBgK2Ag4oaSIGBNb2Rg7JeQ7IScIO2VtOuLuSDtj7TrjZTrpbwg7ISg7YOd7ZWp64uI64ukLn5+Cgp+fuqyjOyehCDsi6Ttlokg7KSRIO2Kleq5gOydtOuCmCDtlITrpqzsp5XsnbQg67Cc7IOd7ZWY66m0ICoq66a066as7KaI7JeQIO2VqOq7mCDssqjrtoDtlZwgQ3VzdG9tIFNldHRpbmdzIGZvciBFVkUuemlwIChBbmRyb2lk7JqpIEVkZW4g7ISk7KCVIO2MjOydvCkgYDAxMDA3QkUwMTYwRDYwMDAuaW5pYOulvCDsoIHsmqntlZwg65KkIOuLpOyLnCDsi6TtlokqKu2VtCDso7zshLjsmpQufn4KCn5+QW5kcm9pZCAxMSDsnbTsg4Hsl5DshJzripQg7KeB7KCRIOqyveuhnOyXkCDrs7XsgqztlZjripQg6rKD67O064ukIEVkZW7snZggKipBZGQtb25zIOyEpOy5mCDquLDriqUqKiDsgqzsmqnsnYQg6raM7J6l7ZWp64uI64ukLn5+CjwhLS0gQU5EUk9JRF9JTlNUQUxMX0dVSURFX1BBVVNFRF9FTkQgLS0+
         run: |
           set -euo pipefail
-          gh api repos/${GITHUB_REPOSITORY}/releases/379109959 > release.json
-          python - <<'PY'
-          import json
-          with open('release.json', encoding='utf-8') as f:
-              r = json.load(f)
-          body = (r.get('body') or '').replace('\r\n','\n').replace('\r','\n')
-          start_text = '**Eden Android Nightly 사용을 권장합니다.**'
-          end_text = 'Android 11 이상에서는 직접 경로에 복사하는 것보다 Eden의 **Add-ons 설치 기능** 사용을 권장합니다.'
-          start = body.index(start_text)
-          end = body.index(end_text, start) + len(end_text)
-          replacement = '''<!-- ANDROID_INSTALL_GUIDE_PAUSED_START -->
-> [!CAUTION]
-> **아래 Android 에뮬레이터 설치 안내는 현재 사용 중지 상태입니다.**
-> 호환성 문제가 해결되면 다시 안내할 예정이며, 아래 내용은 기존 설치 방법 보존용으로 남겨둡니다.
-
-~~**Eden Android Nightly 사용을 권장합니다.**~~
-
-~~패치 완료 후 생성된 `EVE-Ghost-Enemies-KR-v1.1.1-Switch-Android` 폴더를 사용합니다.~~
-
-~~게임 속성 → `Add-ons` → 설치 또는 `+` → `Mod`에서 해당 폴더를 선택합니다.~~
-
-~~게임 실행 중 튕김이나 프리징이 발생하면 **릴리즈에 함께 첨부한 Custom Settings for EVE.zip (Android용 Eden 설정 파일) `01007BE0160D6000.ini`를 적용한 뒤 다시 실행**해 주세요.~~
-
-~~Android 11 이상에서는 직접 경로에 복사하는 것보다 Eden의 **Add-ons 설치 기능** 사용을 권장합니다.~~
-<!-- ANDROID_INSTALL_GUIDE_PAUSED_END -->'''
-          body = body[:start] + replacement + body[end:]
-          with open('payload.json','w',encoding='utf-8') as f:
-              json.dump({'body': body}, f, ensure_ascii=False)
-          PY
+          BODY="$(gh api repos/${GITHUB_REPOSITORY}/releases/379109959 --jq '.body // ""')"
+          export BODY
+          python -c "import os,json,base64; body=os.environ['BODY'].replace('\\r\\n','\\n').replace('\\r','\\n'); start_text='**Eden Android Nightly 사용을 권장합니다.**'; end_text='Android 11 이상에서는 직접 경로에 복사하는 것보다 Eden의 **Add-ons 설치 기능** 사용을 권장합니다.'; start=body.index(start_text); end=body.index(end_text,start)+len(end_text); new=base64.b64decode(os.environ['NEW_B64']).decode(); open('payload.json','w',encoding='utf-8').write(json.dumps({'body':body[:start]+new+body[end:]},ensure_ascii=False))"
           gh api --method PATCH repos/${GITHUB_REPOSITORY}/releases/379109959 --input payload.json
           VERIFY="$(gh api repos/${GITHUB_REPOSITORY}/releases/379109959 --jq '.body // ""')"
           printf '%s' "$VERIFY" | grep -F 'ANDROID_INSTALL_GUIDE_PAUSED_START'
           printf '%s' "$VERIFY" | grep -F '아래 Android 에뮬레이터 설치 안내는 현재 사용 중지 상태입니다.'
-          printf '%s' "$VERIFY" | grep -F '~~패치 완료 후 생성된 `EVE-Ghost-Enemies-KR-v1.1.1-Switch-Android` 폴더를 사용합니다.~~'
