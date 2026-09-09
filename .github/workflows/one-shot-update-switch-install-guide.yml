@@ -10,109 +10,22 @@ permissions:
 
 jobs:
   update-release:
-    if: github.event.head_commit.message == 'One-shot run Switch install guide'
+    if: github.event.head_commit.message == 'One-shot run Switch install guide v2'
     runs-on: ubuntu-latest
     steps:
       - name: Update Switch installation section in v1.1.0 release
         env:
           GH_TOKEN: ${{ github.token }}
+          NEW_B64: IyMjIFN3aXRjaCDsi6TquLAg4oCUIEF0bW9zcGhlcmUKCj4gWyFJTVBPUlRBTlRdCj4gIyMgU3dpdGNoIOyEpOy5mOuKlCDtj7TrjZQgMuqwnOulvCDqsIHqsIEg64uk66W4IOychOy5mOyXkCDrs7Xsgqztlanri4jri6QKPgo+IO2MqOyymCDsi6TtlonsnbQg64Gd64KY66m0ICoqU3dpdGNowrdBbmRyb2lk7JqpIOqysOqzvCDtj7TrjZQqKiDslYjsl5Ag7J6I64qUIOyVhOuemCDrkZAg7Y+0642U66W8IOyCrOyaqe2VqeuLiOuLpC4KPgo+IGBgYHRleHQKPiAwMTAwN0JFMDE2MEQ2MDAwCj4gYXRtb3NwaGVyZQo+IGBgYAo+Cj4gKipgMDEwMDdCRTAxNjBENjAwMGAg7Y+0642U7JmAIGBhdG1vc3BoZXJlYCDtj7TrjZTripQg67O17IKsIOychOy5mOqwgCDshJzroZwg64uk66aF64uI64ukLioqCgojIyMgMeuLqOqzhCDigJQgYDAxMDA3QkUwMTYwRDYwMDBgIO2PtOuNlCDrs7XsgqwKCuqysOqzvOusvOydmCAqKmAwMTAwN0JFMDE2MEQ2MDAwYCDtj7TrjZTrpbwg7Ya17Ke466GcKiog7JWE656YIOychOy5mOyXkCDrs7Xsgqztlanri4jri6QuCgpgYGB0ZXh0ClNEOi9hdG1vc3BoZXJlL2NvbnRlbnRzLwpgYGAKCuuzteyCrOqwgCDrgZ3rgpjrqbQg7JWE656Y7LKY65+8IOuQmOyWtCDsnojslrTslbwg7ZWp64uI64ukLgoKYGBgdGV4dApTROy5tOuTnArilJTilIAgYXRtb3NwaGVyZQogICDilJTilIAgY29udGVudHMKICAgICAg4pSU4pSAIDAxMDA3QkUwMTYwRDYwMDAKYGBgCgojIyMgMuuLqOqzhCDigJQgYGF0bW9zcGhlcmVgIO2PtOuNlCDrs7XsgqwKCuqysOqzvOusvOydmCAqKmBhdG1vc3BoZXJlYCDtj7TrjZTrpbwgU0TsubTrk5wg7LWc7IOB7JyEKOujqO2KuCnsl5Ag67O17IKsKirtlanri4jri6QuCgpgYGB0ZXh0ClNEOi8KYGBgCgrsnbTrr7ggU0TsubTrk5zsl5AgYGF0bW9zcGhlcmVgIO2PtOuNlOqwgCDsnojri6TrqbQgKirquLDsobQg7Y+0642U7JmAIOuzke2Vqe2VtOyEnCDrs7XsgqwqKu2VmOuptCDrkKnri4jri6QuCgojIyMgM+uLqOqzhCDigJQg7J6s67aA7YyFCgrrkZAg7Y+0642U66W8IOuqqOuRkCDrs7XsgqztlojsnLzrqbQgU0TsubTrk5zrpbwgU3dpdGNo7JeQIOuEo+qzoCAqKuuzuOyytOulvCDsnqzrtoDtjIUqKu2VqeuLiOuLpC4KCj4gWyFXQVJOSU5HXQo+IC0gYDAxMDA3QkUwMTYwRDYwMDBgIO2PtOuNlOulvCBTROy5tOuTnCDro6jtirjsl5Ag67CU66GcIOuEo+ycvOuptCDslYgg65Cp64uI64ukLgo+IC0gYGF0bW9zcGhlcmVgIO2PtOuNlOulvCBgY29udGVudHNgIOyViOyXkCDrhKPsnLzrqbQg7JWIIOuQqeuLiOuLpC4KPiAtIOy1nOyiheyggeycvOuhnCBgMDEwMDdCRTAxNjBENjAwMGDsnYAg67CY65Oc7IucIGBTRDovYXRtb3NwaGVyZS9jb250ZW50cy9gIOyVhOuemOyXkCDsnojslrTslbwg7ZWp64uI64ukLgoK7KCV66as7ZWY66m0IOyVhOuemCDrkZAg7KSE66eMIOq4sOyWte2VmOuptCDrkKnri4jri6QuCgpgYGB0ZXh0CjAxMDA3QkUwMTYwRDYwMDAgIOKGkiAgU0Q6L2F0bW9zcGhlcmUvY29udGVudHMvCmF0bW9zcGhlcmUgICAgICAgIOKGkiAgU0Q6LwpgYGAK
         run: |
-          python - <<'PY'
-          import json
-          import subprocess
-
-          repo = 'Dollars-Archive/eve-ghost-enemies-kr-patch'
-          release_id = '379109959'
-
-          release = json.loads(subprocess.check_output(
-              ['gh', 'api', f'repos/{repo}/releases/{release_id}'], text=True
-          ))
-          body = (release.get('body') or '').replace('\r\n', '\n').replace('\r', '\n')
-
-          start = body.index('### Switch 실기 — Atmosphere')
-          end = body.index('\n---\n\n## 다운로드 파일', start)
-
-          new_section = '''### Switch 실기 — Atmosphere
-
-> [!IMPORTANT]
-> ## Switch 설치는 폴더 2개를 각각 다른 위치에 복사합니다
->
-> 패처 실행이 끝나면 **Switch·Android용 결과 폴더** 안에 있는 아래 두 폴더를 사용합니다.
->
-> ```text
-> 01007BE0160D6000
-> atmosphere
-> ```
->
-> **`01007BE0160D6000` 폴더와 `atmosphere` 폴더는 복사 위치가 서로 다릅니다.**
-
-### 1단계 — `01007BE0160D6000` 폴더 복사
-
-결과물의 **`01007BE0160D6000` 폴더를 통째로** 아래 위치에 복사합니다.
-
-```text
-SD:/atmosphere/contents/
-```
-
-복사가 끝나면 아래처럼 되어 있어야 합니다.
-
-```text
-SD카드
-└─ atmosphere
-   └─ contents
-      └─ 01007BE0160D6000
-```
-
-### 2단계 — `atmosphere` 폴더 복사
-
-결과물의 **`atmosphere` 폴더를 SD카드 최상위(루트)에 복사**합니다.
-
-```text
-SD:/
-```
-
-이미 SD카드에 `atmosphere` 폴더가 있다면 **기존 폴더와 병합해서 복사**하면 됩니다.
-
-### 3단계 — 재부팅
-
-두 폴더를 모두 복사했으면 SD카드를 Switch에 넣고 **본체를 재부팅**합니다.
-
-> [!WARNING]
-> - `01007BE0160D6000` 폴더를 SD카드 루트에 바로 넣으면 안 됩니다.
-> - `atmosphere` 폴더를 `contents` 안에 넣으면 안 됩니다.
-> - 최종적으로 `01007BE0160D6000`은 반드시 `SD:/atmosphere/contents/` 아래에 있어야 합니다.
-
-정리하면 아래 두 줄만 기억하면 됩니다.
-
-```text
-01007BE0160D6000  →  SD:/atmosphere/contents/
-atmosphere        →  SD:/
-```
-'''
-
-          new_body = body[:start] + new_section + body[end:]
-          with open('payload.json', 'w', encoding='utf-8') as f:
-              json.dump({'body': new_body}, f, ensure_ascii=False)
-
-          subprocess.run(
-              ['gh', 'api', '--method', 'PATCH', f'repos/{repo}/releases/{release_id}', '--input', 'payload.json'],
-              check=True,
-          )
-
-          verify = json.loads(subprocess.check_output(
-              ['gh', 'api', f'repos/{repo}/releases/{release_id}'], text=True
-          )).get('body') or ''
-
-          required = [
-              'Switch 설치는 폴더 2개를 각각 다른 위치에 복사합니다',
-              '01007BE0160D6000  →  SD:/atmosphere/contents/',
-              'atmosphere        →  SD:/',
-              '기존 폴더와 병합해서 복사',
-              '본체를 재부팅',
-          ]
-          missing = [x for x in required if x not in verify]
-          if missing:
-              raise SystemExit('Verification failed: ' + repr(missing))
-
-          print('Verified: Switch install guide updated in v1.1.0 release.')
-          PY
+          set -euo pipefail
+          BODY="$(gh api repos/${GITHUB_REPOSITORY}/releases/379109959 --jq '.body // ""')"
+          export BODY
+          python -c "import os,json,base64; body=os.environ['BODY'].replace('\\r\\n','\\n').replace('\\r','\\n'); start=body.index('### Switch 실기 — Atmosphere'); end=body.index('\\n---\\n\\n## 다운로드 파일', start); new=base64.b64decode(os.environ['NEW_B64']).decode(); open('payload.json','w',encoding='utf-8').write(json.dumps({'body':body[:start]+new+body[end:]},ensure_ascii=False))"
+          gh api --method PATCH repos/${GITHUB_REPOSITORY}/releases/379109959 --input payload.json
+          VERIFY="$(gh api repos/${GITHUB_REPOSITORY}/releases/379109959 --jq '.body // ""')"
+          printf '%s' "$VERIFY" | grep -F 'Switch 설치는 폴더 2개를 각각 다른 위치에 복사합니다'
+          printf '%s' "$VERIFY" | grep -F '01007BE0160D6000  →  SD:/atmosphere/contents/'
+          printf '%s' "$VERIFY" | grep -F 'atmosphere        →  SD:/'
+          printf '%s' "$VERIFY" | grep -F '기존 폴더와 병합해서 복사'
+          printf '%s' "$VERIFY" | grep -F '본체를 재부팅'
