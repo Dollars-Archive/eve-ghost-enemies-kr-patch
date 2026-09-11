@@ -10,33 +10,33 @@ permissions:
 
 jobs:
   update-install:
-    if: github.event.head_commit.message == 'One-shot fix PC install folder v1.2.0'
+    if: github.event.head_commit.message == 'One-shot fix PC install folder v1.2.0 v2'
     runs-on: ubuntu-latest
     steps:
-      - name: Fix PC folder installation instructions
+      - name: Replace PC installation section
         env:
           GH_TOKEN: ${{ github.token }}
-          OLD1: NC4g7Je066awIOqyjOyehCDrqqjrk5wg7Y+0642U7JeQIFBDIOqysOqzvOusvOydmCDslYTrnpgg65GQIO2PtOuNlOulvCDtlajqu5gg67O17IKs7ZWp64uI64ukLgoKYGBgdGV4dApleGVmcwpyb21mcwpgYGAKCjUuIOuzteyCrCDtm4Qg6rKM7J6EIOuqqOuTnCDsnITsuZgg67CU66GcIOyVhOuemOyXkCBgZXhlZnNg7JmAIGByb21mc2DqsIAg67O07Jes7JW8IO2VqeuLiOuLpC4=
-          NEW1: NC4g7Je066awIO2PtOuNlCDslYjsl5Ag7Yyo7LKY6rCAIOyDneyEse2VnCAqKmBFVkUtR2hvc3QtRW5lbWllcy1LUi12MS4yLjAtUENgIO2PtOuNlCDsnpDssrTrpbwg7Ya17Ke466GcIOuzteyCrCoq7ZWp64uI64ukLgo1LiDrs7Xsgqwg7ZuEIOyVhOuemOyymOufvCDrs7TsnbTrqbQg7KCV7IOB7J6F64uI64ukLgoKYGBgdGV4dAp1c2VyCuKUlOKUgCBsb2FkCiAgIOKUlOKUgCAwMTAwN0JFMDE2MEQ2MDAwCiAgICAgIOKUlOKUgCBFVkUtR2hvc3QtRW5lbWllcy1LUi12MS4yLjAtUEMKICAgICAgICAg4pSc4pSAIGV4ZWZzCiAgICAgICAgIOKUgiAg4pSU4pSAIG1haW4KICAgICAgICAg4pSU4pSAIHJvbWZzCiAgICAgICAgICAgIOKUlOKUgCBkYXRhX2V2ZTMKYGBg
-          OLD2: PiBbIVdBUk5JTkddCj4gYEVWRS1HaG9zdC1FbmVtaWVzLUtSLXYxLjIuMC1QQ2Ag7Y+0642UIOyekOyytOulvCDtlZwg64uo6rOEIOuNlCDslYjsqr3sl5Ag64Sj7KeAIOuniOyEuOyalC4KPgo+IEVkZW7snbQg7J2964qUIOqyjOyehCDrqqjrk5wg7JyE7LmY7JeQ7IScICoqYGV4ZWZzYOyZgCBgcm9tZnNg6rCAIOuwlOuhnCDrs7Tsl6zslbwg7ZWp64uI64ukLioq
-          NEW2: PiBbIUlNUE9SVEFOVF0KPiAqKmBleGVmc2DsmYAgYHJvbWZzYOunjCDqurzrgrTshJwgYDAxMDA3QkUwMTYwRDYwMDBgIOuwlOuhnCDslYTrnpjsl5Ag64Sj64qUIOqyg+ydtCDslYTri5nri4jri6QuKioKPgo+IGBPcGVuIE1vZCBEYXRhIExvY2F0aW9uYOycvOuhnCDsl7TrprAg7JyE7LmY7JeQICoqYEVWRS1HaG9zdC1FbmVtaWVzLUtSLXYxLjIuMC1QQ2Ag7Y+0642UIOyekOyytOulvCDrhKPsnLzrqbQg65Cp64uI64ukLioq
-          OLD3: NS4gUEPsl5DshJzripQg6rKM7J6EIOuqqOuTnCDsnITsuZgg67CU66GcIOyVhOuemOyXkCBgZXhlZnNg7JmAIGByb21mc2DqsIAg7J6I64qU7KeAIO2ZleyduA==
-          NEW3: NS4gUEPsl5DshJzripQgYE9wZW4gTW9kIERhdGEgTG9jYXRpb25g7Jy866GcIOyXtOumsCBgMDEwMDdCRTAxNjBENjAwMGAg7Y+0642UIOyViOyXkCAqKmBFVkUtR2hvc3QtRW5lbWllcy1LUi12MS4yLjAtUENgIO2PtOuNlCDsnpDssrTqsIAg65Ok7Ja06rCAIOyeiOuKlOyngCDtmZXsnbgqKg==
+          SECTION_B64: IyA0LiBQQyDsoIHsmqkg67Cp67KVCgojIyBFZGVuIFdpbmRvd3MKCj4gWyFUSVBdCj4gKirqtozsnqUg67KE7KCEOiBFZGVuIFdpbmRvd3MgdjAuMi4xIFN0YW5kYXJkKioKCuyCrOyaqe2VmOuKlCDtj7TrjZQ6CgpgYGB0ZXh0CkVWRS1HaG9zdC1FbmVtaWVzLUtSLXYxLjIuMC1QQwpgYGAKCiMjIyDsoIHsmqkg7Iic7IScCgoxLiBFZGVu7JeQ7IScIGBFVkUgZ2hvc3QgZW5lbWllc2Drpbwg7LC+7Iq164uI64ukLgoyLiDqsozsnoTsnYQgKirsmrDtgbTrpq0qKu2VqeuLiOuLpC4KMy4gYE9wZW4gTW9kIERhdGEgTG9jYXRpb25gIOuYkOuKlCAqKuuqqOuTnCDrjbDsnbTthLAg7JyE7LmYIOyXtOq4sCoq66W8IOyEoO2Dne2VqeuLiOuLpC4KNC4g7Je066awIO2PtOuNlCDslYjsl5Ag7Yyo7LKY6rCAIOyDneyEse2VnCAqKmBFVkUtR2hvc3QtRW5lbWllcy1LUi12MS4yLjAtUENgIO2PtOuNlCDsnpDssrTrpbwg7Ya17Ke466GcIOuzteyCrCoq7ZWp64uI64ukLgo1LiDrs7Xsgqwg7ZuEIOyVhOuemOyymOufvCDrs7TsnbTrqbQg7KCV7IOB7J6F64uI64ukLgoKYGBgdGV4dAp1c2VyCuKUlOKUgCBsb2FkCiAgIOKUlOKUgCAwMTAwN0JFMDE2MEQ2MDAwCiAgICAgIOKUlOKUgCBFVkUtR2hvc3QtRW5lbWllcy1LUi12MS4yLjAtUEMKICAgICAgICAg4pSc4pSAIGV4ZWZzCiAgICAgICAgIOKUgiAg4pSU4pSAIG1haW4KICAgICAgICAg4pSU4pSAIHJvbWZzCiAgICAgICAgICAgIOKUlOKUgCBkYXRhX2V2ZTMKYGBgCgo2LiDquLDsobQgdjEuMS54IOuqqOuTnOuCmCDqsJnsnYAg6rKM7J6EIO2MjOydvOydhCDsiJjsoJXtlZjripQg64uk66W4IOuqqOuTnOqwgCDsnojri6TrqbQg67mE7Zmc7ISx7ZmU7ZWY6rGw64KYIOygnOqxsO2VqeuLiOuLpC4KNy4gRWRlbuydhCDri6Tsi5wg7Iuk7ZaJ7ZWY6rGw64KYIOqyjOyehCDrqqnroZ3snYQg7IOI66Gc6rOg7Lmo7ZWcIOuSpCDqsozsnoTsnYQg7Iuc7J6R7ZWp64uI64ukLgo4LiDtg4DsnbTti4Ag7ZmU66m06rO8IOqyjOyehCDrgrQg64yA7IKs6rCAIO2VnOq1reyWtOuhnCDtkZzsi5zrkJjripTsp4Ag7ZmV7J247ZWp64uI64ukLgoKPGltZyB3aWR0aD0iMTcwIiBoZWlnaHQ9IjI2MiIgYWx0PSJFZGVuIFdpbmRvd3Mg66qo65OcIOuNsOydtO2EsCDsnITsuZgg7Je06riwIiBzcmM9Imh0dHBzOi8vZ2l0aHViLmNvbS91c2VyLWF0dGFjaG1lbnRzL2Fzc2V0cy82ZWI4Yjc4Yi0zNjJlLTRlMWQtYTk1Mi0xYTZmZWNlZDhjNWUiIC8+Cgo+IFshSU1QT1JUQU5UXQo+ICoqYGV4ZWZzYOyZgCBgcm9tZnNg66eMIOq6vOuCtOyEnCBgMDEwMDdCRTAxNjBENjAwMGAg67CU66GcIOyVhOuemOyXkCDrhKPripQg6rKD7J20IOyVhOuLmeuLiOuLpC4qKgo+Cj4gYE9wZW4gTW9kIERhdGEgTG9jYXRpb25g7Jy866GcIOyXtOumsCDsnITsuZjsl5AgKipgRVZFLUdob3N0LUVuZW1pZXMtS1ItdjEuMi4wLVBDYCDtj7TrjZQg7J6Q7LK066W8IOuEo+ycvOuptCDrkKnri4jri6QuKioK
         run: |
           set -euo pipefail
           gh api repos/${GITHUB_REPOSITORY}/contents/INSTALL.md > file.json
           python - <<'PY'
-          import base64, json, os, subprocess
+          import base64, json, os
           data = json.load(open('file.json', encoding='utf-8'))
           text = base64.b64decode(data['content']).decode('utf-8')
-          pairs = [(os.environ['OLD1'], os.environ['NEW1']), (os.environ['OLD2'], os.environ['NEW2']), (os.environ['OLD3'], os.environ['NEW3'])]
-          for old_b64, new_b64 in pairs:
-              old = base64.b64decode(old_b64).decode('utf-8')
-              new = base64.b64decode(new_b64).decode('utf-8')
-              assert old in text, old
-              text = text.replace(old, new, 1)
-          encoded = base64.b64encode(text.encode('utf-8')).decode('ascii')
-          payload = {'message':'docs: fix Eden PC mod folder installation path','content':encoded,'sha':data['sha']}
+          start = text.index('# 4. PC 적용 방법')
+          end = text.index('---\n\n# 5. Android 적용 방법', start)
+          section = base64.b64decode(os.environ['SECTION_B64']).decode('utf-8')
+          text = text[:start] + section + '\n\n' + text[end:]
+          old = '5. PC에서는 게임 모드 위치 바로 아래에 `exefs`와 `romfs`가 있는지 확인'
+          new = '5. PC에서는 `Open Mod Data Location`으로 열린 `01007BE0160D6000` 폴더 안에 **`EVE-Ghost-Enemies-KR-v1.2.0-PC` 폴더 자체가 들어가 있는지 확인**'
+          assert old in text
+          text = text.replace(old, new, 1)
+          payload = {
+              'message': 'docs: fix Eden PC mod folder installation path',
+              'content': base64.b64encode(text.encode('utf-8')).decode('ascii'),
+              'sha': data['sha'],
+          }
           json.dump(payload, open('payload.json','w',encoding='utf-8'), ensure_ascii=False)
           PY
           gh api --method PUT repos/${GITHUB_REPOSITORY}/contents/INSTALL.md --input payload.json > updated.json
@@ -45,8 +45,8 @@ jobs:
           import base64, json
           data = json.load(open('verify.json', encoding='utf-8'))
           text = base64.b64decode(data['content']).decode('utf-8')
-          assert 'EVE-Ghost-Enemies-KR-v1.2.0-PC 폴더 자체를 통째로 복사' in text
-          assert 'exefs와 romfs만 꺼내서' in text
-          assert 'PC에서는 `Open Mod Data Location`' in text
+          assert 'EVE-Ghost-Enemies-KR-v1.2.0-PC` 폴더 자체를 통째로 복사' in text
+          assert '`exefs`와 `romfs`만 꺼내서 `01007BE0160D6000` 바로 아래에 넣는 것이 아닙니다.' in text
+          assert 'PC에서는 `Open Mod Data Location`으로 열린 `01007BE0160D6000` 폴더 안에' in text
           print(data['sha'])
           PY
