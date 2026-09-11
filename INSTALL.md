@@ -1,7 +1,7 @@
 # EVE ghost enemies 한국어 패치 설치 가이드
 
 이 문서는 EVE ghost enemies 한국어 패치의 공용 설치 가이드입니다.  
-현재 기준 버전은 **v1.2.0**이며, 패처는 사용자가 준비한 RomForge 언팩 원본에서 PC·Odin2 Portal·Nintendo Switch용 direct-main 결과를 생성합니다.
+현재 기준 버전은 **v1.2.0**이며, 패처는 사용자가 준비한 RomForge 언팩 원본에서 PC·Android·Nintendo Switch용 direct-main 결과를 생성합니다.
 
 ---
 
@@ -96,7 +96,7 @@ EVE-Ghost-Enemies-KR-v1.2.0-PC
 └─ romfs
    └─ data_eve3
 
-EVE-Ghost-Enemies-KR-v1.2.0-Odin2-Portal
+EVE-Ghost-Enemies-KR-v1.2.0-Android
 └─ 01007BE0160D6000
    ├─ exefs
    │  └─ main
@@ -138,9 +138,9 @@ Eden에서 게임을 우클릭한 뒤 `Open Mod Data Location`을 열고, 위 �
 
 ---
 
-## 5. Odin2 Portal / Android Eden 설치
+## 5. Android Eden 설치
 
-Odin2 Portal 결과의 `01007BE0160D6000` 폴더를 Eden의 게임 모드 경로에 설치합니다.
+Android 결과의 `01007BE0160D6000` 폴더를 Eden의 게임 모드 경로에 설치합니다.
 
 최종 구조:
 
@@ -154,14 +154,22 @@ Odin2 Portal 결과의 `01007BE0160D6000` 폴더를 Eden의 게임 모드 경로
 
 Eden의 `Add-ons` → `Mod` 설치 기능을 사용하거나, 해당 Title ID 폴더를 Eden의 `load` 경로에 복사할 수 있습니다.
 
-v1.2.0 direct-main 결과는 **Odin2 Portal에서 검증**되었습니다.  
+v1.2.0 direct-main 결과는 **Android(Odin2 Portal)에서 검증**되었습니다.  
 다른 Android 기기에서는 에뮬레이터 버전과 기기별 호환성이 다를 수 있습니다.
 
 ---
 
 ## 6. Nintendo Switch 실기 설치
 
-Switch 결과의 `atmosphere` 폴더를 SD 카드 루트에 병합 복사합니다.
+기존 Switch 모드 위에 결과물을 그대로 덮어쓰지 마세요. 이전 패치 파일이 남아 있으면
+direct-main과 RomFS가 충돌하여 오류가 발생할 수 있습니다. 반드시 기존 모드를 먼저 삭제하고,
+SD 카드의 다음 폴더를 내용물이 없는 상태로 만든 뒤 새 패치 결과를 설치합니다.
+
+```text
+SD:/atmosphere/contents/01007BE0160D6000
+```
+
+그 다음 Switch 결과의 `atmosphere` 폴더를 SD 카드 루트에 새로 복사합니다.
 
 최종 경로:
 
@@ -191,7 +199,7 @@ v1.2.0에는 다음 수정이 포함됩니다.
 - 일반 저장 실패 사례 수정
 - 30·36번 세이브에서 확인된 목록 이동 프리징 수정
 - 저장·삭제·복사·사이트 변경 관련 시스템 문구 번역
-- PC·Odin2 Portal·Nintendo Switch direct-main 출력 통합
+- PC·Android·Nintendo Switch direct-main 출력 통합
 
 패치는 세이브 파일 자체를 수정하지 않습니다.  
 기존 세이브의 원본 백업은 계속 보관하는 것을 권장합니다.
