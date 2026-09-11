@@ -116,19 +116,15 @@ EVE-Ghost-Enemies-KR-vX.Y.Z-Patcher
 >
 > **Android에서 플레이하실 분들은 현재 버전 적용을 기다려 주시고, 수정된 다음 패치가 배포된 뒤 이용해 주세요.**
 
-> [!CAUTION]
-> **아래 Android 에뮬레이터 설치 안내는 현재 사용 중지 상태입니다.**  
-> 호환성 문제가 해결되면 다시 안내할 예정이며, 아래 내용은 기존 설치 방법 보존용으로 남겨둡니다.
+**Eden Android Nightly 사용을 권장합니다.**
 
-~~**Eden Android Nightly 사용을 권장합니다.**~~
+패처가 생성한 `EVE-Ghost-Enemies-KR-vX.Y.Z-Switch-Android` 폴더를 사용합니다.
 
-~~패처가 생성한 `EVE-Ghost-Enemies-KR-vX.Y.Z-Switch-Android` 폴더를 사용합니다.~~
+게임 속성 → `Add-ons` → 설치 또는 `+` → `Mod`에서 해당 폴더를 선택합니다.
 
-~~게임 속성 → `Add-ons` → 설치 또는 `+` → `Mod`에서 해당 폴더를 선택합니다.~~
+게임 실행 중 튕김이나 프리징이 발생하면 릴리즈에 함께 첨부된 `Custom Settings for EVE.zip`의 Android용 Eden 설정 파일 `01007BE0160D6000.ini`를 적용한 뒤 다시 실행해 주세요.
 
-~~게임 실행 중 튕김이나 프리징이 발생하면 릴리즈에 함께 첨부된 `Custom Settings for EVE.zip`의 Android용 Eden 설정 파일 `01007BE0160D6000.ini`를 적용한 뒤 다시 실행해 주세요.~~
-
-~~Android 11 이상에서는 직접 경로에 복사하는 것보다 Eden의 **Add-ons 설치 기능** 사용을 권장합니다.~~
+Android 11 이상에서는 직접 경로에 복사하는 것보다 Eden의 **Add-ons 설치 기능** 사용을 권장합니다.
 
 ---
 
