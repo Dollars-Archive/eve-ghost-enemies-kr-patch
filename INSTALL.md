@@ -271,40 +271,75 @@ EVE-Ghost-Enemies-KR-v1.2.0-Switch
 > [!CAUTION]
 > **기존 Switch 한글패치 위에 그대로 덮어쓰지 마세요.**
 >
-> 구버전 IPS나 RomFS 파일이 남아 있으면 새 direct-main 파일과 충돌해 오류가 발생할 수 있습니다.
+> 구버전 IPS나 RomFS 파일이 남아 있으면 새 direct-main 파일과 충돌해 오류가 발생할 수 있습니다. 먼저 기존 모드와 v1.1.1 IPS 흔적을 정리한 뒤 새 결과물을 적용하세요.
 
-### 적용 순서
+설치는 아래 두 방법 중 편한 방법을 사용하면 됩니다.
 
-1. Switch의 전원을 끄고 SD 카드를 PC에 연결합니다.
-2. 아래 기존 모드 폴더가 있다면 **삭제하거나 내부를 완전히 비웁니다.**
+### 방법 A. SD 카드를 PC에 연결해서 설치
+
+1. 실행 중인 `EVE ghost enemies`를 완전히 종료합니다.
+2. SD 카드를 직접 분리해서 작업할 경우 Switch 전원을 끈 뒤 SD 카드를 PC에 연결합니다.
+3. 아래 기존 모드 폴더가 있다면 **삭제하거나 내부를 완전히 비웁니다.**
 
 ```text
 SD:/atmosphere/contents/01007BE0160D6000
 ```
 
-3. 기존 v1.1.1 IPS 패치셋이 있다면 아래 경로도 백업 후 비활성화하거나 제거합니다.
+4. 기존 v1.1.1 IPS 패치셋이 있다면 아래 경로도 백업 후 비활성화하거나 제거합니다.
 
 ```text
 SD:/atmosphere/exefs_patches/EVE-Ghost-Enemies-KR-v1.1.1
 ```
 
-4. 패처가 생성한 Switch 결과물 안의 `atmosphere` 폴더를 SD 카드 **최상위 루트**에 복사합니다.
-5. 기존 `atmosphere` 폴더가 있다면 정상적으로 병합합니다.
-6. 복사가 끝난 뒤 아래 경로를 확인합니다.
+5. 패처가 생성한 Switch 결과물 안의 `atmosphere` 폴더를 SD 카드 **최상위 루트**에 복사합니다.
+6. SD 카드에 이미 `atmosphere` 폴더가 있다면 기존 폴더와 병합해서 복사합니다.
+7. 복사가 끝난 뒤 아래 경로를 확인합니다.
 
 ```text
 SD:/atmosphere/contents/01007BE0160D6000/exefs/main
 SD:/atmosphere/contents/01007BE0160D6000/romfs/data_eve3/...
 ```
 
-7. SD 카드를 Switch에 다시 넣습니다.
-8. **Switch 본체를 완전히 재부팅**합니다.
-9. 게임을 실행해 한국어 적용 여부를 확인합니다.
+8. SD 카드를 Switch에 다시 넣고 평소처럼 부팅한 뒤 게임을 실행해 한국어 적용 여부를 확인합니다.
+
+### 방법 B. DBI MTP로 SD 카드 분리 없이 설치
+
+SD 카드를 빼지 않고도 **Switch와 PC를 USB 케이블로 연결한 뒤 DBI의 MTP 기능으로 SD 카드에 직접 복사**할 수 있습니다. DBI의 `Run MTP responder`는 PC에서 **`1: SD Card`**를 열어 SD 카드의 파일과 폴더를 복사·삭제할 수 있게 해 줍니다.
+
+참고: [DBI 공식 GitHub 문서](https://github.com/rashevskyv/dbi)
+
+1. 실행 중인 `EVE ghost enemies`를 완전히 종료합니다.
+2. Switch에서 **DBI**를 실행합니다.
+3. DBI 메인 화면에서 **`Run MTP responder`**를 실행합니다.
+   - DBI 문서 기준 메인 화면에서 `X` 버튼으로 MTP responder를 실행하거나 종료할 수 있습니다.
+4. **데이터 전송이 가능한 USB 케이블**로 Switch와 PC를 연결합니다.
+5. Windows 파일 탐색기에서 DBI/Switch 장치를 열고 **`1: SD Card`**를 선택합니다.
+6. 아래 기존 모드 폴더가 있다면 삭제하거나 내부를 완전히 비웁니다.
+
+```text
+1: SD Card/atmosphere/contents/01007BE0160D6000
+```
+
+7. 기존 v1.1.1 IPS 패치셋이 남앀 있다면 아래 경로도 백업 후 비활성화하거나 제거합니다.
+
+```text
+1: SD Card/atmosphere/exefs_patches/EVE-Ghost-Enemies-KR-v1.1.1
+```
+
+8. 패처가 생성한 Switch 결과물 안의 `atmosphere` 폴더를 **`1: SD Card`의 최상위 루트**에 복사합니다.
+9. 파일 복사가 완전히 끝난 것을 확인한 뒤 DBI의 MTP responder를 종료합니다.
+10. 게임을 실행해 한국어 적용 여부를 확인합니다.
+
+> [!TIP]
+> **정상적으로 적용되면 별도 재부팅은 필요하지 않습니다.**
+>
+> 한글패치가 적용되지 않거나 이전 파일이 남아 있는 것처럼 보일 때만 **Switch 본체를 재부팅한 뒤 다시 실행**해 보세요.
 
 > [!WARNING]
 > `01007BE0160D6000` 폴더를 SD 카드 루트에 바로 넣는 것이 아닙니다.
 >
 > 반드시 `SD:/atmosphere/contents/01007BE0160D6000/` 구조가 되어야 합니다.
+
 
 ---
 
@@ -320,7 +355,7 @@ SD:/atmosphere/contents/01007BE0160D6000/romfs/data_eve3/...
 6. Android에서는 `01007BE0160D6000/exefs/main`과 `romfs/data_eve3`가 함께 있는지 확인
 7. Android에서는 **Eden Android Nightly 최신 빌드**를 사용 중인지 확인
 8. Switch에서는 구버전 `01007BE0160D6000` 모드와 v1.1.1 IPS를 먼저 제거했는지 확인
-9. Switch 적용 후 **완전 재부팅**했는지 확인
+9. Switch에서는 게임을 완전히 종료한 뒤 다시 실행해 보고, 한글패치가 적용되지 않을 때만 **본체를 재부팅**한 뒤 다시 확인
 
 패처가 원본 검사 단계에서 중단된다면 파일을 억지로 바꾸기보다 **깨끗한 Base + Update 원본부터 다시 준비하는 것을 권장**합니다.
 
