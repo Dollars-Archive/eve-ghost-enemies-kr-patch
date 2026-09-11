@@ -1,8 +1,7 @@
 # EVE ghost enemies 한국어 패치 설치 가이드
 
-이 문서는 **설치 방법을 한곳에서 관리하기 위한 공용 설치 가이드**입니다.
-
-앞으로 각 Release에는 해당 버전의 변경 사항과 호환성만 간단히 적고, 실제 설치 방법은 이 문서를 기준으로 안내합니다.
+이 문서는 EVE ghost enemies 한국어 패치의 공용 설치 가이드입니다.  
+현재 기준 버전은 **v1.2.0**이며, 패처는 사용자가 준비한 RomForge 언팩 원본에서 PC·Odin2 Portal·Nintendo Switch용 direct-main 결과를 생성합니다.
 
 ---
 
@@ -20,184 +19,189 @@
 > 패치 기준은 게임 내 표시 버전 **1.02**입니다.
 
 > [!IMPORTANT]
-> **본편만 추출한 RomFS는 사용할 수 없습니다.**  
-> 반드시 **본편 + 지원 업데이트(RomForge 1.01 / 게임 내 1.02)가 함께 적용된 RomFS**가 필요합니다.
+> 본편만 언팩한 결과는 사용할 수 없습니다.  
+> 반드시 **Base v0 + Update v131072**가 함께 반영된 RomForge 언팩 결과를 준비해야 합니다.
 
 ---
 
-## 1. RomForge로 RomFS 준비
+## 1. RomForge로 원본 언팩
 
-> [!TIP]
-> **RomFS 덤프 방법을 이미 알고 계신다면 이 과정은 건너뛰셔도 됩니다.**
+1. RomForge 1.7.0을 실행합니다.
+2. 본인이 소유한 EVE ghost enemies Base와 Update v131072 파일을 불러옵니다.
+3. Base와 Update가 함께 적용된 상태로 언팩합니다.
+4. 언팩이 끝난 폴더의 `unpacked` 폴더를 확인합니다.
 
-1. RomForge를 실행합니다.
-2. 상단 메뉴에서 `Switch` → `리팩` → `파일`로 이동합니다.
-3. **EVE ghost enemies 본편 파일과 지원 업데이트 파일**을 RomForge 창으로 드래그합니다.
-4. 우측 하단의 **폴더 아이콘**을 눌러 Output 위치를 지정합니다.
-5. 하단의 **`언팩`** 버튼을 누릅니다.
-6. 언팩이 완료될 때까지 기다립니다.
-
-정상적으로 불러왔다면 RomForge에 아래 두 항목이 표시됩니다.
+EVE ghost enemies를 언팩하면 다음과 같이 두 개의 Title ID 폴더가 생길 수 있습니다.
 
 ```text
-Base   : 01007BE0160D6000 / 1.0.0
-Update : 01007BE0160D6800 / 1.01
+unpacked
+├─ 01007BE0160D6000
+│  ├─ exefs
+│  │  └─ main
+│  └─ romfs
+│     └─ data_eve3
+└─ 01007BE0160D6001
+   └─ DESIRE remaster 특전 데이터
 ```
 
-> 게임 실행 후에는 업데이트 버전이 **1.02**로 표시됩니다.
-
 > [!WARNING]
-> ### RomFS 언팩 시 생성되는 2개의 타이틀 폴더
->
-> EVE ghost enemies를 RomForge로 언팩하면 아래와 같이 **2개의 타이틀 폴더가 생성됩니다.**
->
-> ```text
-> 01007BE0160D6000
-> └─ EVE Ghost Enemies 본편
->
-> 01007BE0160D6001
-> └─ DESIRE remaster 특전
-> ```
->
-> **이는 언팩 오류가 아니라 정상적인 구조입니다.**  
-> 한글패치를 적용할 때는 반드시 **EVE Ghost Enemies 본편인 `01007BE0160D6000` 폴더**를 사용해 주세요.  
-> `01007BE0160D6001`은 업데이트 데이터가 아니라 **DESIRE remaster 특전용 별도 프로그램**입니다.
+> 패치에 사용하는 폴더는 반드시 **`01007BE0160D6000`**입니다.  
+> `01007BE0160D6001`은 DESIRE remaster 특전용 별도 프로그램입니다.
 
 ---
 
-## 2. 한국어 패치 적용
+## 2. v1.2.0 패처 실행
 
 1. 배포 ZIP을 완전히 압축 해제합니다.
 2. `EVE-Ghost-Enemies-KR-Patcher.exe`를 실행합니다.
-3. `[폴더 선택]`을 누릅니다.
-4. RomForge에서 언팩한 아래 `romfs` 폴더를 선택합니다.
+3. RomForge 결과의 **`unpacked` 폴더**를 선택합니다.
+
+예시:
 
 ```text
-unpacked\01007BE0160D6000\romfs
+unpacked
+└─ 01007BE0160D6000
+   ├─ exefs
+   │  └─ main
+   └─ romfs
+      └─ data_eve3
 ```
 
-5. 화면에 `패치를 시작할 수 있습니다.`가 표시되는지 확인합니다.
-6. `[한국어 패치 시작]`을 누릅니다.
-7. 원본 검증 → 패치 적용 → 결과 검증이 자동으로 진행됩니다.
+`01007BE0160D6000` 폴더 자체를 선택해도 자동으로 인식합니다.  
+예전처럼 `romfs` 폴더만 선택하면 안 됩니다.
 
-패치가 완료되면 패처 폴더 안에 PC용과 Switch·Android용 결과 폴더가 생성됩니다.
+4. 결과물을 저장할 위치를 선택합니다.
+5. **한국어 패치 시작**을 누릅니다.
 
-```text
-EVE-Ghost-Enemies-KR-vX.Y.Z-Patcher
-├─ EVE-Ghost-Enemies-KR-vX.Y.Z-PC
-└─ EVE-Ghost-Enemies-KR-vX.Y.Z-Switch-Android
-```
+패처는 다음을 자동으로 검사합니다.
 
-`vX.Y.Z` 부분은 설치한 패치 버전에 따라 달라집니다.
+- 지원 Title ID
+- 원본 `exefs/main` 크기·SHA-256·Build ID
+- RomFS 대상 135개 파일의 크기와 SHA-256
+- xdelta 패치 파일의 무결성
+- 생성된 결과 파일의 최종 SHA-256
+
+검사에 실패하면 원본을 수정하지 않고 중단합니다.
 
 ---
 
-## 3. PC 설치
+## 3. 생성되는 결과 폴더
 
-### Eden Windows
-
-> [!TIP]
-> **권장 버전: Eden Windows v0.2.1 Standard**
-
-패처가 생성한 **PC용 결과 폴더**를 사용합니다.
-
-게임 우클릭 → `Open Mod Data Location`을 연 뒤 해당 패치 폴더를 적용합니다.
-
----
-
-## 4. Android 설치
-
-### Eden Android Nightly
-
-> [!WARNING]
-> ### Android판 실행 관련 중요 안내
-> 현재 Android 환경은 **Lenovo Legion Y700 3세대에서만 게임 실행을 확인**했습니다.  
-> 그 외 Android 기기에서는 **게임이 실행되지 않는 문제가 있어 현재 원인을 조사 중**입니다.
->
-> **Android에서 플레이하실 분들은 현재 버전 적용을 기다려 주시고, 수정된 다음 패치가 배포된 뒤 이용해 주세요.**
-
-**Eden Android Nightly 사용을 권장합니다.**
-
-패처가 생성한 `EVE-Ghost-Enemies-KR-vX.Y.Z-Switch-Android` 폴더를 사용합니다.
-
-게임 속성 → `Add-ons` → 설치 또는 `+` → `Mod`에서 해당 폴더를 선택합니다.
-
-게임 실행 중 튕김이나 프리징이 발생하면 릴리즈에 함께 첨부된 `Custom Settings for EVE.zip`의 Android용 Eden 설정 파일 `01007BE0160D6000.ini`를 적용한 뒤 다시 실행해 주세요.
-
-Android 11 이상에서는 직접 경로에 복사하는 것보다 Eden의 **Add-ons 설치 기능** 사용을 권장합니다.
-
----
-
-## 5. Nintendo Switch 실기 설치
-
-### Atmosphere
-
-> [!IMPORTANT]
-> ## Switch 설치는 폴더 2개를 각각 다른 위치에 복사합니다
->
-> 패처 실행이 끝나면 **Switch·Android용 결과 폴더** 안의 아래 두 폴더를 사용합니다.
->
-> ```text
-> 01007BE0160D6000
-> atmosphere
-> ```
->
-> **`01007BE0160D6000` 폴더와 `atmosphere` 폴더는 복사 위치가 서로 다릅니다.**
-
-### 1단계: `01007BE0160D6000` 폴더 복사
-
-결과물의 **`01007BE0160D6000` 폴더를 통째로** 아래 위치에 복사합니다.
+패처는 세 플랫폼 결과를 한 번에 생성합니다.
 
 ```text
-SD:/atmosphere/contents/
-```
+EVE-Ghost-Enemies-KR-v1.2.0-PC
+├─ exefs
+│  └─ main
+└─ romfs
+   └─ data_eve3
 
-복사가 끝나면 아래처럼 되어 있어야 합니다.
+EVE-Ghost-Enemies-KR-v1.2.0-Odin2-Portal
+└─ 01007BE0160D6000
+   ├─ exefs
+   │  └─ main
+   └─ romfs
+      └─ data_eve3
 
-```text
-SD카드
+EVE-Ghost-Enemies-KR-v1.2.0-Switch
 └─ atmosphere
    └─ contents
       └─ 01007BE0160D6000
+         ├─ exefs
+         │  └─ main
+         └─ romfs
+            └─ data_eve3
 ```
 
-### 2단계: `atmosphere` 폴더 복사
+v1.2.0은 실행 파일을 직접 교체하는 **direct-main 방식**입니다.  
+이 버전의 배포물에는 실행 파일용 IPS가 포함되지 않습니다.
 
-결과물의 **`atmosphere` 폴더를 SD카드 최상위(루트)에 복사**합니다.
+---
+
+## 4. PC Eden 설치
+
+PC 결과 폴더를 Eden의 게임 모드 데이터 위치에 새 모드로 등록합니다.
+
+최종 구조:
 
 ```text
-SD:/
+모드 폴더
+├─ exefs
+│  └─ main
+└─ romfs
+   └─ data_eve3
 ```
 
-이미 SD카드에 `atmosphere` 폴더가 있다면 **기존 폴더와 병합해서 복사**하면 됩니다.
+Eden에서 게임을 우클릭한 뒤 `Open Mod Data Location`을 열고, 위 구조가 유지되도록 복사합니다.
 
-### 3단계: 한글패치 적용 여부 확인
+기존 v1.1.x 모드나 같은 게임 파일을 수정하는 모드는 비활성화해야 합니다.
 
-두 폴더를 모두 복사했으면 **먼저 재부팅하지 말고 게임을 실행해서 한글패치가 적용됐는지 확인**해 주세요.
+---
 
-정상적으로 한글이 표시된다면 **추가 재부팅 없이 그대로 사용하면 됩니다.**
+## 5. Odin2 Portal / Android Eden 설치
 
-> [!TIP]
-> 한글패치가 적용되지 않거나 변경 내용이 반영되지 않는 경우에만 **Switch 본체를 재부팅한 뒤 다시 실행**해 주세요.
+Odin2 Portal 결과의 `01007BE0160D6000` 폴더를 Eden의 게임 모드 경로에 설치합니다.
 
-> [!WARNING]
-> - `01007BE0160D6000` 폴더를 SD카드 루트에 바로 넣으면 안 됩니다.
-> - `atmosphere` 폴더를 `contents` 안에 넣으면 안 됩니다.
-> - 최종적으로 `01007BE0160D6000`은 반드시 `SD:/atmosphere/contents/` 아래에 있어야 합니다.
-
-정리하면 아래 두 줄만 기억하면 됩니다.
+최종 구조:
 
 ```text
-01007BE0160D6000  →  SD:/atmosphere/contents/
-atmosphere        →  SD:/
+01007BE0160D6000
+├─ exefs
+│  └─ main
+└─ romfs
+   └─ data_eve3
 ```
+
+Eden의 `Add-ons` → `Mod` 설치 기능을 사용하거나, 해당 Title ID 폴더를 Eden의 `load` 경로에 복사할 수 있습니다.
+
+v1.2.0 direct-main 결과는 **Odin2 Portal에서 검증**되었습니다.  
+다른 Android 기기에서는 에뮬레이터 버전과 기기별 호환성이 다를 수 있습니다.
+
+---
+
+## 6. Nintendo Switch 실기 설치
+
+Switch 결과의 `atmosphere` 폴더를 SD 카드 루트에 병합 복사합니다.
+
+최종 경로:
+
+```text
+SD:/atmosphere/contents/01007BE0160D6000/exefs/main
+SD:/atmosphere/contents/01007BE0160D6000/romfs/data_eve3/...
+```
+
+복사 후 Switch를 완전히 재부팅하고 게임을 실행합니다.
+
+> [!IMPORTANT]
+> v1.2.0은 direct-main 방식이므로 다음 IPS 경로는 사용하지 않습니다.
+>
+> ```text
+> SD:/atmosphere/exefs_patches/EVE-Ghost-Enemies-KR-v1.1.1
+> ```
+>
+> 기존 v1.1.1 IPS 패치셋은 백업한 뒤 비활성화하거나 제거해야 합니다.
+
+---
+
+## 7. v1.2.0 변경 사항
+
+v1.2.0에는 다음 수정이 포함됩니다.
+
+- 저장·불러오기 목록의 문자열 처리 프리징 수정
+- 일반 저장 실패 사례 수정
+- 30·36번 세이브에서 확인된 목록 이동 프리징 수정
+- 저장·삭제·복사·사이트 변경 관련 시스템 문구 번역
+- PC·Odin2 Portal·Nintendo Switch direct-main 출력 통합
+
+패치는 세이브 파일 자체를 수정하지 않습니다.  
+기존 세이브의 원본 백업은 계속 보관하는 것을 권장합니다.
 
 ---
 
 ## 주의사항
 
-- 본인이 소유한 게임에서 직접 준비한 원본을 사용하세요.
-- 이미 다른 패치나 모드가 적용된 RomFS는 사용할 수 없습니다.
-- 기존 결과 폴더가 존재하면 패처가 덮어쓰지 않고 중단합니다.
-
-본 배포본에는 **게임 본편 및 원본 게임 데이터, 원본 RomFS, 키 파일 또는 완성 게임 파일이 포함되어 있지 않습니다.**
+- 본인이 소유한 게임과 키로 준비한 원본을 사용하세요.
+- 이미 다른 번역 패치나 모드가 적용된 RomFS·main은 사용할 수 없습니다.
+- 패처는 기존 결과 폴더를 덮어쓰지 않습니다.
+- 패처는 원본 NSP·XCI를 재팩하지 않으며, 완성 게임 파일을 배포하지 않습니다.
+- 배포물에는 원본 게임, 원본 RomFS, prod.keys, 완성된 main이 포함되지 않습니다.
