@@ -251,9 +251,18 @@ Android 11 이상에서는 파일 관리 앱으로 `Android/data` 내부를 직�
 
 ### Custom Settings 관련
 
-v1.1.1에서 사용하던 `Custom Settings for EVE.zip`과 `01007BE0160D6000.ini` 안내는 **구버전용 안내**입니다.
+> [!IMPORTANT]
+> **v1.2.0에서도 기존과 동일하게 Android용 Custom Settings를 적용해 주세요.**
+>
+> direct-main 방식으로 변경되었지만, 이 설정은 에뮬레이터 쪽 게임별 설정이므로 패치 방식과 별개입니다.
 
-v1.2.0 direct-main 패치에서는 우선 **Eden Android Nightly 최신 빌드 + v1.2.0 결과물만으로 실행**해 주세요.
+릴리즈에 첨부된 `Custom Settings for EVE.zip`을 압축 해제한 뒤 Android용 Eden 설정 파일인 아래 파일을 적용합니다.
+
+```text
+01007BE0160D6000.ini
+```
+
+**Eden Android Nightly 최신 빌드 + v1.2.0 한글패치 결과물 + `01007BE0160D6000.ini` 설정**을 함께 사용해 주세요.
 
 ---
 
