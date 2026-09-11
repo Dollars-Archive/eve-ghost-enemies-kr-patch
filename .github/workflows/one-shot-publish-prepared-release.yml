@@ -1,0 +1,36 @@
+name: One-shot publish prepared v1.2.0 release
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  publish-release:
+    if: github.event.head_commit.message == 'One-shot publish prepared v1.2.0 release'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Publish v1.2.0 release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh api --method PATCH repos/${GITHUB_REPOSITORY}/releases/386393192 \
+            -F draft=false \
+            -f tag_name='v1.2.0' \
+            -f target_commitish='2d76b3ca2f90c07dd21bb283fca0de0b15eeb915' \
+            -f name='EVE ghost enemies 한국어 패치 v1.2.0' > updated.json
+          python - <<'PY'
+          import json
+          with open('updated.json', encoding='utf-8') as f:
+              r = json.load(f)
+          assert r['id'] == 386393192
+          assert r['draft'] is False
+          assert r['tag_name'] == 'v1.2.0'
+          assert r['name'] == 'EVE ghost enemies 한국어 패치 v1.2.0'
+          assert r.get('published_at')
+          print(r['html_url'])
+          PY
