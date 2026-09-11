@@ -1,0 +1,52 @@
+name: One-shot fix PC install folder v1.2.0
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  update-install:
+    if: github.event.head_commit.message == 'One-shot fix PC install folder v1.2.0'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fix PC folder installation instructions
+        env:
+          GH_TOKEN: ${{ github.token }}
+          OLD1: NC4g7Je066awIOqyjOyehCDrqqjrk5wg7Y+0642U7JeQIFBDIOqysOqzvOusvOydmCDslYTrnpgg65GQIO2PtOuNlOulvCDtlajqu5gg67O17IKs7ZWp64uI64ukLgoKYGBgdGV4dApleGVmcwpyb21mcwpgYGAKCjUuIOuzteyCrCDtm4Qg6rKM7J6EIOuqqOuTnCDsnITsuZgg67CU66GcIOyVhOuemOyXkCBgZXhlZnNg7JmAIGByb21mc2DqsIAg67O07Jes7JW8IO2VqeuLiOuLpC4=
+          NEW1: NC4g7Je066awIO2PtOuNlCDslYjsl5Ag7Yyo7LKY6rCAIOyDneyEse2VnCAqKmBFVkUtR2hvc3QtRW5lbWllcy1LUi12MS4yLjAtUENgIO2PtOuNlCDsnpDssrTrpbwg7Ya17Ke466GcIOuzteyCrCoq7ZWp64uI64ukLgo1LiDrs7Xsgqwg7ZuEIOyVhOuemOyymOufvCDrs7TsnbTrqbQg7KCV7IOB7J6F64uI64ukLgoKYGBgdGV4dAp1c2VyCuKUlOKUgCBsb2FkCiAgIOKUlOKUgCAwMTAwN0JFMDE2MEQ2MDAwCiAgICAgIOKUlOKUgCBFVkUtR2hvc3QtRW5lbWllcy1LUi12MS4yLjAtUEMKICAgICAgICAg4pSc4pSAIGV4ZWZzCiAgICAgICAgIOKUgiAg4pSU4pSAIG1haW4KICAgICAgICAg4pSU4pSAIHJvbWZzCiAgICAgICAgICAgIOKUlOKUgCBkYXRhX2V2ZTMKYGBg
+          OLD2: PiBbIVdBUk5JTkddCj4gYEVWRS1HaG9zdC1FbmVtaWVzLUtSLXYxLjIuMC1QQ2Ag7Y+0642UIOyekOyytOulvCDtlZwg64uo6rOEIOuNlCDslYjsqr3sl5Ag64Sj7KeAIOuniOyEuOyalC4KPgo+IEVkZW7snbQg7J2964qUIOqyjOyehCDrqqjrk5wg7JyE7LmY7JeQ7IScICoqYGV4ZWZzYOyZgCBgcm9tZnNg6rCAIOuwlOuhnCDrs7Tsl6zslbwg7ZWp64uI64ukLioq
+          NEW2: PiBbIUlNUE9SVEFOVF0KPiAqKmBleGVmc2DsmYAgYHJvbWZzYOunjCDqurzrgrTshJwgYDAxMDA3QkUwMTYwRDYwMDBgIOuwlOuhnCDslYTrnpjsl5Ag64Sj64qUIOqyg+ydtCDslYTri5nri4jri6QuKioKPgo+IGBPcGVuIE1vZCBEYXRhIExvY2F0aW9uYOycvOuhnCDsl7TrprAg7JyE7LmY7JeQICoqYEVWRS1HaG9zdC1FbmVtaWVzLUtSLXYxLjIuMC1QQ2Ag7Y+0642UIOyekOyytOulvCDrhKPsnLzrqbQg65Cp64uI64ukLioq
+          OLD3: NS4gUEPsl5DshJzripQg6rKM7J6EIOuqqOuTnCDsnITsuZgg67CU66GcIOyVhOuemOyXkCBgZXhlZnNg7JmAIGByb21mc2DqsIAg7J6I64qU7KeAIO2ZleyduA==
+          NEW3: NS4gUEPsl5DshJzripQgYE9wZW4gTW9kIERhdGEgTG9jYXRpb25g7Jy866GcIOyXtOumsCBgMDEwMDdCRTAxNjBENjAwMGAg7Y+0642UIOyViOyXkCAqKmBFVkUtR2hvc3QtRW5lbWllcy1LUi12MS4yLjAtUENgIO2PtOuNlCDsnpDssrTqsIAg65Ok7Ja06rCAIOyeiOuKlOyngCDtmZXsnbgqKg==
+        run: |
+          set -euo pipefail
+          gh api repos/${GITHUB_REPOSITORY}/contents/INSTALL.md > file.json
+          python - <<'PY'
+          import base64, json, os, subprocess
+          data = json.load(open('file.json', encoding='utf-8'))
+          text = base64.b64decode(data['content']).decode('utf-8')
+          pairs = [(os.environ['OLD1'], os.environ['NEW1']), (os.environ['OLD2'], os.environ['NEW2']), (os.environ['OLD3'], os.environ['NEW3'])]
+          for old_b64, new_b64 in pairs:
+              old = base64.b64decode(old_b64).decode('utf-8')
+              new = base64.b64decode(new_b64).decode('utf-8')
+              assert old in text, old
+              text = text.replace(old, new, 1)
+          encoded = base64.b64encode(text.encode('utf-8')).decode('ascii')
+          payload = {'message':'docs: fix Eden PC mod folder installation path','content':encoded,'sha':data['sha']}
+          json.dump(payload, open('payload.json','w',encoding='utf-8'), ensure_ascii=False)
+          PY
+          gh api --method PUT repos/${GITHUB_REPOSITORY}/contents/INSTALL.md --input payload.json > updated.json
+          gh api repos/${GITHUB_REPOSITORY}/contents/INSTALL.md > verify.json
+          python - <<'PY'
+          import base64, json
+          data = json.load(open('verify.json', encoding='utf-8'))
+          text = base64.b64decode(data['content']).decode('utf-8')
+          assert 'EVE-Ghost-Enemies-KR-v1.2.0-PC 폴더 자체를 통째로 복사' in text
+          assert 'exefs와 romfs만 꺼내서' in text
+          assert 'PC에서는 `Open Mod Data Location`' in text
+          print(data['sha'])
+          PY
