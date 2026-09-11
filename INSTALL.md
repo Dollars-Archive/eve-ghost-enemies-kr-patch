@@ -320,7 +320,7 @@ SD 카드를 빼지 않고도 **Switch와 PC를 USB 케이블로 연결한 뒤 D
 1: SD Card/atmosphere/contents/01007BE0160D6000
 ```
 
-7. 기존 v1.1.1 IPS 패치셋이 남앀 있다면 아래 경로도 백업 후 비활성화하거나 제거합니다.
+7. 기존 v1.1.1 IPS 패치셋이 남아 있다면 아래 경로도 백업 후 비활성화하거나 제거합니다.
 
 ```text
 1: SD Card/atmosphere/exefs_patches/EVE-Ghost-Enemies-KR-v1.1.1
