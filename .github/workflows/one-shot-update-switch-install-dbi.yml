@@ -1,4 +1,4 @@
-name: One-shot update Switch install with DBI MTP
+name: One-shot fix DBI typo
 
 on:
   push:
@@ -9,41 +9,32 @@ permissions:
   contents: write
 
 jobs:
-  update-install:
-    if: github.event.head_commit.message == 'One-shot update Switch install with DBI MTP'
+  fix-typo:
+    if: github.event.head_commit.message == 'One-shot fix DBI typo'
     runs-on: ubuntu-latest
     steps:
-      - name: Update Switch installation guide
+      - name: Fix typo in INSTALL.md
         env:
           GH_TOKEN: ${{ github.token }}
-          SECTION_B64: IyA2LiBOaW50ZW5kbyBTd2l0Y2gg7Iuk6riwIOyggeyaqSDrsKnrspUKCiMjIEF0bW9zcGhlcmUKCuyCrOyaqe2VmOuKlCDtj7TrjZQ6CgpgYGB0ZXh0CkVWRS1HaG9zdC1FbmVtaWVzLUtSLXYxLjIuMC1Td2l0Y2gK4pSU4pSAIGF0bW9zcGhlcmUKYGBgCgo+IFshQ0FVVElPTl0KPiAqKuq4sOyhtCBTd2l0Y2gg7ZWc6riA7Yyo7LmYIOychOyXkCDqt7jrjIDroZwg642u7Ja07JOw7KeAIOuniOyEuOyalC4qKgo+Cj4g6rWs67KE7KCEIElQU+uCmCBSb21GUyDtjIzsnbzsnbQg64Ko7JWEIOyeiOycvOuptCDsg4ggZGlyZWN0LW1haW4g7YyM7J286rO8IOy2qeuPjO2VtCDsmKTrpZjqsIAg67Cc7IOd7ZWgIOyImCDsnojsirXri4jri6QuIOuovOyggCDquLDsobQg66qo65Oc7JmAIHYxLjEuMSBJUFMg7Z2U7KCB7J2EIOygleumrO2VnCDrkqQg7IOIIOqysOqzvOusvOydhCDsoIHsmqntlZjshLjsmpQuCgrshKTsuZjripQg7JWE656YIOuRkCDrsKnrspUg7KSRIO2OuO2VnCDrsKnrspXsnYQg7IKs7Jqp7ZWY66m0IOuQqeuLiOuLpC4KCiMjIyDrsKnrspUgQS4gU0Qg7Lm065Oc66W8IFBD7JeQIOyXsOqysO2VtOyEnCDshKTsuZgKCjEuIOyLpO2WiSDspJHsnbggYEVWRSBnaG9zdCBlbmVtaWVzYOulvCDsmYTsoITtnogg7KKF66OM7ZWp64uI64ukLgoyLiBTRCDsubTrk5zrpbwg7KeB7KCRIOu2hOumrO2VtOyEnCDsnpHsl4XtlaAg6rK97JqwIFN3aXRjaCDsoITsm5DsnYQg64GIIOuSpCBTRCDsubTrk5zrpbwgUEPsl5Ag7Jew6rKw7ZWp64uI64ukLgozLiDslYTrnpgg6riw7KG0IOuqqOuTnCDtj7TrjZTqsIAg7J6I64uk66m0ICoq7IKt7KCc7ZWY6rGw64KYIOuCtOu2gOulvCDsmYTsoITtnogg67mE7JuB64uI64ukLioqCgpgYGB0ZXh0ClNEOi9hdG1vc3BoZXJlL2NvbnRlbnRzLzAxMDA3QkUwMTYwRDYwMDAKYGBgCgo0LiDquLDsobQgdjEuMS4xIElQUyDtjKjsuZjshYvsnbQg7J6I64uk66m0IOyVhOuemCDqsr3roZzrj4Qg67Cx7JeFIO2bhCDruYTtmZzshLHtmZTtlZjqsbDrgpgg7KCc6rGw7ZWp64uI64ukLgoKYGBgdGV4dApTRDovYXRtb3NwaGVyZS9leGVmc19wYXRjaGVzL0VWRS1HaG9zdC1FbmVtaWVzLUtSLXYxLjEuMQpgYGAKCjUuIO2MqOyymOqwgCDsg53shLHtlZwgU3dpdGNoIOqysOqzvOusvCDslYjsnZggYGF0bW9zcGhlcmVgIO2PtOuNlOulvCBTRCDsubTrk5wgKirstZzsg4HsnIQg66Oo7Yq4Kirsl5Ag67O17IKs7ZWp64uI64ukLgo2LiBTRCDsubTrk5zsl5Ag7J2066+4IGBhdG1vc3BoZXJlYCDtj7TrjZTqsIAg7J6I64uk66m0IOq4sOyhtCDtj7TrjZTsmYAg67OR7ZWp7ZW07IScIOuzteyCrO2VqeuLiOuLpC4KNy4g67O17IKs6rCAIOuBneuCnCDrkqQg7JWE656YIOqyveuhnOulvCDtmZXsnbjtlanri4jri6QuCgpgYGB0ZXh0ClNEOi9hdG1vc3BoZXJlL2NvbnRlbnRzLzAxMDA3QkUwMTYwRDYwMDAvZXhlZnMvbWFpbgpTRDovYXRtb3NwaGVyZS9jb250ZW50cy8wMTAwN0JFMDE2MEQ2MDAwL3JvbWZzL2RhdGFfZXZlMy8uLi4KYGBgCgo4LiBTRCDsubTrk5zrpbwgU3dpdGNo7JeQIOuLpOyLnCDrhKPqs6Ag7Y+J7IaM7LKY65+8IOu2gO2Mhe2VnCDrkqQg6rKM7J6E7J2EIOyLpO2Wie2VtCDtlZzqta3slrQg7KCB7JqpIOyXrOu2gOulvCDtmZXsnbjtlanri4jri6QuCgojIyMg67Cp67KVIEIuIERCSSBNVFDroZwgU0Qg7Lm065OcIOu2hOumrCDsl4bsnbQg7ISk7LmYCgpTRCDsubTrk5zrpbwg67m87KeAIOyViuqzoOuPhCAqKlN3aXRjaOyZgCBQQ+ulvCBVU0Ig7LyA7J2067iU66GcIOyXsOqysO2VnCDrkqQgREJJ7J2YIE1UUCDquLDriqXsnLzroZwgU0Qg7Lm065Oc7JeQIOyngeygkSDrs7XsgqwqKu2VoCDsiJgg7J6I7Iq164uI64ukLiBEQknsnZggYFJ1biBNVFAgcmVzcG9uZGVyYOuKlCBQQ+yXkOyEnCAqKmAxOiBTRCBDYXJkYCoq66W8IOyXtOyWtCBTRCDsubTrk5zsnZgg7YyM7J286rO8IO2PtOuNlOulvCDrs7XsgqzCt+yCreygnO2VoCDsiJgg7J6I6rKMIO2VtCDspI3ri4jri6QuCgrssLjqs6A6IFtEQkkg6rO17IudIEdpdEh1YiDrrLjshJxdKGh0dHBzOi8vZ2l0aHViLmNvbS9yYXNoZXZza3l2L2RiaSkKCjEuIOyLpO2WiSDspJHsnbggYEVWRSBnaG9zdCBlbmVtaWVzYOulvCDsmYTsoITtnogg7KKF66OM7ZWp64uI64ukLgoyLiBTd2l0Y2jsl5DshJwgKipEQkkqKuulvCDsi6Ttlontlanri4jri6QuCjMuIERCSSDrqZTsnbgg7ZmU66m07JeQ7IScICoqYFJ1biBNVFAgcmVzcG9uZGVyYCoq66W8IOyLpO2Wie2VqeuLiOuLpC4KICAgLSBEQkkg66y47IScIOq4sOykgCDrqZTsnbgg7ZmU66m07JeQ7IScIGBYYCDrsoTtirzsnLzroZwgTVRQIHJlc3BvbmRlcuulvCDsi6TtlontlZjqsbDrgpgg7KKF66OM7ZWgIOyImCDsnojsirXri4jri6QuCjQuICoq642w7J207YSwIOyghOyGoeydtCDqsIDriqXtlZwgVVNCIOy8gOydtOu4lCoq66GcIFN3aXRjaOyZgCBQQ+ulvCDsl7DqsrDtlanri4jri6QuCjUuIFdpbmRvd3Mg7YyM7J28IO2DkOyDieq4sOyXkOyEnCBEQkkvU3dpdGNoIOyepey5mOulvCDsl7Tqs6AgKipgMTogU0QgQ2FyZGAqKuulvCDshKDtg53tlanri4jri6QuCjYuIOyVhOuemCDquLDsobQg66qo65OcIO2PtOuNlOqwgCDsnojri6TrqbQg7IKt7KCc7ZWY6rGw64KYIOuCtOu2gOulvCDsmYTsoITtnogg67mE7JuB64uI64ukLgoKYGBgdGV4dAoxOiBTRCBDYXJkL2F0bW9zcGhlcmUvY29udGVudHMvMDEwMDdCRTAxNjBENjAwMApgYGAKCjcuIOq4sOyhtCB2MS4xLjEgSVBTIO2MqOy5mOyFi+ydtCDrgqjslYAg7J6I64uk66m0IOyVhOuemCDqsr3roZzrj4Qg67Cx7JeFIO2bhCDruYTtmZzshLHtmZTtlZjqsbDrgpgg7KCc6rGw7ZWp64uI64ukLgoKYGBgdGV4dAoxOiBTRCBDYXJkL2F0bW9zcGhlcmUvZXhlZnNfcGF0Y2hlcy9FVkUtR2hvc3QtRW5lbWllcy1LUi12MS4xLjEKYGBgCgo4LiDtjKjsspjqsIAg7IOd7ISx7ZWcIFN3aXRjaCDqsrDqs7zrrLwg7JWI7J2YIGBhdG1vc3BoZXJlYCDtj7TrjZTrpbwgKipgMTogU0QgQ2FyZGDsnZgg7LWc7IOB7JyEIOujqO2KuCoq7JeQIOuzteyCrO2VqeuLiOuLpC4KOS4g7YyM7J28IOuzteyCrOqwgCDsmYTsoITtnogg64Gd64KcIOqyg+ydhCDtmZXsnbjtlZwg65KkIERCSeydmCBNVFAgcmVzcG9uZGVy66W8IOyiheujjO2VqeuLiOuLpC4KMTAuIOqyjOyehOydhCDsi6TtlontlbQg7ZWc6rWt7Ja0IOyggeyaqSDsl6zrtoDrpbwg7ZmV7J247ZWp64uI64ukLgoKPiBbIVRJUF0KPiAqKuygleyDgeyggeycvOuhnCDsoIHsmqnrkJjrqbQg67OE64+EIOyerOu2gO2MheydgCDtlYTsmpTtlZjsp4Ag7JWK7Iq164uI64ukLioqCj4KPiDtlZzquIDtjKjsuZjqsIAg7KCB7Jqp65CY7KeAIOyViuqxsOuCmCDsnbTsoIQg7YyM7J287J20IOuCqOyVhCDsnojripQg6rKD7LKY65+8IOuztOydvCDrlYzrp4wgKipTd2l0Y2gg67O47LK066W8IOyerOu2gO2Mhe2VnCDrkqQg64uk7IucIOyLpO2WiSoq7ZW0IOuztOyEuOyalC4KCj4gWyFXQVJOSU5HXQo+IGAwMTAwN0JFMDE2MEQ2MDAwYCDtj7TrjZTrpbwgU0Qg7Lm065OcIOujqO2KuOyXkCDrsJTroZwg64Sj64qUIOqyg+ydtCDslYTri5nri4jri6QuCj4KPiDrsJjrk5zsi5wgYFNEOi9hdG1vc3BoZXJlL2NvbnRlbnRzLzAxMDA3QkUwMTYwRDYwMDAvYCDqtazsobDqsIAg65CY7Ja07JW8IO2VqeuLiOuLpC4K
         run: |
           set -euo pipefail
           gh api repos/${GITHUB_REPOSITORY}/contents/INSTALL.md > file.json
           python - <<'PY'
-          import base64, json, os
-          data = json.load(open('file.json', encoding='utf-8'))
-          text = base64.b64decode(data['content']).decode('utf-8')
-          start = text.index('# 6. Nintendo Switch 실기 적용 방법')
-          end = text.index('---\n\n# 7. 패치가 적용되지 않을 때 확인', start)
-          section = base64.b64decode(os.environ['SECTION_B64']).decode('utf-8')
-          text = text[:start] + section + '\n\n' + text[end:]
-          old = '9. Switch 적용 후 **완전 재부팅**했는지 확인'
-          new = '9. Switch에서는 게임을 완전히 종료한 뒤 다시 실행해 보고, 한글패치가 적용되지 않을 때만 **본체를 재부팅**한 뒤 다시 확인'
-          assert old in text
-          text = text.replace(old, new, 1)
-          payload = {'message':'docs: add DBI MTP Switch install option and make reboot optional','content':base64.b64encode(text.encode('utf-8')).decode('ascii'),'sha':data['sha']}
-          json.dump(payload, open('payload.json','w',encoding='utf-8'), ensure_ascii=False)
+          import base64, json
+          data=json.load(open('file.json',encoding='utf-8'))
+          text=base64.b64decode(data['content']).decode('utf-8')
+          assert '남앀 있다면' in text
+          text=text.replace('남앀 있다면','남아 있다면',1)
+          payload={'message':'docs: fix DBI MTP typo','content':base64.b64encode(text.encode('utf-8')).decode('ascii'),'sha':data['sha']}
+          json.dump(payload,open('payload.json','w',encoding='utf-8'),ensure_ascii=False)
           PY
           gh api --method PUT repos/${GITHUB_REPOSITORY}/contents/INSTALL.md --input payload.json > updated.json
           gh api repos/${GITHUB_REPOSITORY}/contents/INSTALL.md > verify.json
           python - <<'PY'
-          import base64, json
+          import base64,json
           data=json.load(open('verify.json',encoding='utf-8'))
           text=base64.b64decode(data['content']).decode('utf-8')
-          assert 'Run MTP responder' in text
-          assert '1: SD Card' in text
-          assert '정상적으로 적용되면 별도 재부팅은 필요하지 않습니다.' in text
-          assert 'Switch 본체를 완전히 재부팅' not in text
+          assert '남앀' not in text
+          assert '남아 있다면' in text
           print(data['sha'])
           PY
