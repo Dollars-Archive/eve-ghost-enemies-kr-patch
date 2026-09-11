@@ -1,4 +1,4 @@
-name: One-shot restore Android custom settings guidance
+name: One-shot restore Android custom settings guidance v2
 
 on:
   push:
@@ -10,55 +10,17 @@ permissions:
 
 jobs:
   update-install:
-    if: github.event.head_commit.message == 'One-shot restore Android custom settings guidance'
+    if: github.event.head_commit.message == 'One-shot restore Android custom settings guidance v2'
     runs-on: ubuntu-latest
     steps:
       - name: Restore Android Custom Settings instructions
         env:
           GH_TOKEN: ${{ github.token }}
+          NEW_SECTION_B64: IyMjIEN1c3RvbSBTZXR0aW5ncyDqtIDroKgKCj4gWyFJTVBPUlRBTlRdCj4gKip2MS4yLjDsl5DshJzrj4Qg6riw7KG06rO8IOuPmeydvO2VmOqyjCBBbmRyb2lk7JqpIEN1c3RvbSBTZXR0aW5nc+ulvCDsoIHsmqntlbQg7KO87IS47JqULioqCj4KPiBkaXJlY3QtbWFpbiDrsKnsi53snLzroZwg67OA6rK965CY7JeI7KeA66eMLCDsnbQg7ISk7KCV7J2AIOyXkOuurOugiOydtO2EsCDsqr0g6rKM7J6E67OEIOyEpOygleydtOuvgOuhnCDtjKjsuZgg67Cp7Iud6rO8IOuzhOqwnOyeheuLiOuLpC4KCuumtOumrOymiOyXkCDssqjrtoDrkJwgYEN1c3RvbSBTZXR0aW5ncyBmb3IgRVZFLnppcGDsnYQg7JWV7LaVIO2VtOygnO2VnCDrkqQgQW5kcm9pZOyaqSBFZGVuIOyEpOyglSDtjIzsnbzsnbgg7JWE656YIO2MjOydvOydhCDsoIHsmqntlanri4jri6QuCgpgYGB0ZXh0CjAxMDA3QkUwMTYwRDYwMDAuaW5pCmBgYAoKKipFZGVuIEFuZHJvaWQgTmlnaHRseSDstZzsi6Ag67mM65OcICsgdjEuMi4wIO2VnOq4gO2MqOy5mCDqsrDqs7zrrLwgKyBgMDEwMDdCRTAxNjBENjAwMC5pbmlgIOyEpOyglSoq7J2EIO2VqOq7mCDsgqzsmqntlbQg7KO87IS47JqULg==
         run: |
           set -euo pipefail
           gh api repos/${GITHUB_REPOSITORY}/contents/INSTALL.md > file.json
-          python - <<'PY'
-          import base64, json
-          data = json.load(open('file.json', encoding='utf-8'))
-          text = base64.b64decode(data['content']).decode('utf-8')
-          old = '''### Custom Settings 관련
-
-v1.1.1에서 사용하던 `Custom Settings for EVE.zip`과 `01007BE0160D6000.ini` 안내는 **구버전용 안내**입니다.
-
-v1.2.0 direct-main 패치에서는 우선 **Eden Android Nightly 최신 빌드 + v1.2.0 결과물만으로 실행**해 주세요.'''
-          new = '''### Custom Settings 관련
-
-> [!IMPORTANT]
-> **v1.2.0에서도 기존과 동일하게 Android용 Custom Settings를 적용해 주세요.**
->
-> direct-main 방식으로 변경되었지만, 이 설정은 에뮬레이터 쪽 게임별 설정이므로 패치 방식과 별개입니다.
-
-릴리즈에 첨부된 `Custom Settings for EVE.zip`을 압축 해제한 뒤 Android용 Eden 설정 파일인 아래 파일을 적용합니다.
-
-```text
-01007BE0160D6000.ini
-```
-
-**Eden Android Nightly 최신 빌드 + v1.2.0 한글패치 결과물 + `01007BE0160D6000.ini` 설정**을 함께 사용하는 것을 권장합니다.'''
-          assert old in text
-          text = text.replace(old, new, 1)
-          payload = {
-              'message': 'docs: restore Android Custom Settings requirement',
-              'content': base64.b64encode(text.encode('utf-8')).decode('ascii'),
-              'sha': data['sha'],
-          }
-          json.dump(payload, open('payload.json','w',encoding='utf-8'), ensure_ascii=False)
-          PY
+          python -c "import os,base64,json; d=json.load(open('file.json',encoding='utf-8')); t=base64.b64decode(d['content']).decode('utf-8'); s=t.index('### Custom Settings 관련'); e=t.index('\n\n---',s); n=base64.b64decode(os.environ['NEW_SECTION_B64']).decode('utf-8'); out=t[:s]+n+t[e:]; p={'message':'docs: restore Android Custom Settings requirement','content':base64.b64encode(out.encode('utf-8')).decode('ascii'),'sha':d['sha']}; json.dump(p,open('payload.json','w',encoding='utf-8'),ensure_ascii=False)"
           gh api --method PUT repos/${GITHUB_REPOSITORY}/contents/INSTALL.md --input payload.json > updated.json
           gh api repos/${GITHUB_REPOSITORY}/contents/INSTALL.md > verify.json
-          python - <<'PY'
-          import base64, json
-          data = json.load(open('verify.json', encoding='utf-8'))
-          text = base64.b64decode(data['content']).decode('utf-8')
-          assert 'v1.2.0에서도 기존과 동일하게 Android용 Custom Settings를 적용해 주세요.' in text
-          assert '01007BE0160D6000.ini' in text
-          assert '구버전용 안내' not in text
-          print(data['sha'])
-          PY
+          python -c "import base64,json; d=json.load(open('verify.json',encoding='utf-8')); t=base64.b64decode(d['content']).decode('utf-8'); assert 'v1.2.0에서도 기존과 동일하게 Android용 Custom Settings를 적용해 주세요.' in t; assert '01007BE0160D6000.ini' in t; assert '구버전용 안내' not in t; print(d['sha'])"
