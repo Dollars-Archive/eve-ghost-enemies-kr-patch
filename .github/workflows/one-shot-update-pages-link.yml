@@ -1,0 +1,41 @@
+name: One-shot update Pages link
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  update-release:
+    if: github.event.head_commit.message == 'One-shot update Ghost Pages link'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Update v1.2.0 release install link
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh api repos/${GITHUB_REPOSITORY}/releases/386393192 > release.json
+          python - <<'PY'
+          import json
+          data = json.load(open('release.json', encoding='utf-8'))
+          body = data['body']
+          old = 'https://github.com/Dollars-Archive/eve-ghost-enemies-kr-patch/blob/main/INSTALL.md'
+          new = 'https://dollars-archive.github.io/eve-ghost-enemies-kr-patch/'
+          assert old in body, 'old INSTALL.md link not found'
+          body = body.replace(old, new)
+          json.dump({'body': body}, open('payload.json', 'w', encoding='utf-8'), ensure_ascii=False)
+          PY
+          gh api --method PATCH repos/${GITHUB_REPOSITORY}/releases/386393192 --input payload.json > updated.json
+          gh api repos/${GITHUB_REPOSITORY}/releases/386393192 > verify.json
+          python - <<'PY'
+          import json
+          data = json.load(open('verify.json', encoding='utf-8'))
+          body = data['body']
+          assert 'https://dollars-archive.github.io/eve-ghost-enemies-kr-patch/' in body
+          assert 'https://github.com/Dollars-Archive/eve-ghost-enemies-kr-patch/blob/main/INSTALL.md' not in body
+          print('release link updated')
+          PY
