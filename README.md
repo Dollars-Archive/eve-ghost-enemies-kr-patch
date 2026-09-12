@@ -2,7 +2,10 @@
 
 Nintendo Switch판 **EVE ghost enemies** 비공식 한국어 패치입니다.
 
-최신 버전 다운로드 및 자세한 적용 방법은 [Releases](https://github.com/Dollars-Archive/eve-ghost-enemies-kr-patch/releases)를 확인해 주세요.
+최신 버전 다운로드는 [Releases](https://github.com/Dollars-Archive/eve-ghost-enemies-kr-patch/releases), 자세한 적용 방법은 **[웹 설치 가이드](https://dollars-archive.github.io/eve-ghost-enemies-kr-patch/)**를 확인해 주세요.
+
+> [!TIP]
+> 설치 방법을 처음 보는 경우 GitHub의 `INSTALL.md` 원문보다 **[웹 설치 가이드](https://dollars-archive.github.io/eve-ghost-enemies-kr-patch/)**에서 보는 것을 권장합니다.
 
 ## 지원 게임 버전
 
@@ -69,7 +72,7 @@ Nintendo Switch판 **EVE ghost enemies** 비공식 한국어 패치입니다.
 
 최신 한국어 패치는 [Releases](https://github.com/Dollars-Archive/eve-ghost-enemies-kr-patch/releases)에서 받을 수 있습니다.
 
-배포 파일에 포함된 `설명서.txt` 또는 해당 버전의 Release 안내를 참고해 주세요.
+설치 및 적용 방법은 **[웹 설치 가이드](https://dollars-archive.github.io/eve-ghost-enemies-kr-patch/)**를 참고해 주세요.
 
 ## 오류 및 번역 제보
 
