@@ -131,7 +131,7 @@ SD:/atmosphere/contents/01007BE0160D6000/romfs/data_eve3/...
 2. Switch에서 **DBI**를 실행합니다.
 3. **`Run MTP responder`**를 실행합니다.
 4. 데이터 전송이 가능한 USB 케이블로 Switch와 PC를 연결합니다.
-5. Windows 파일 탐색기에서 **`1: SD Card`**를 엽니다.
+5. PC 파일 탐색기에서 **`1: SD Card`**를 엽니다.
 6. 아래 기존 모드 폴더가 있다면 삭제하거나 내부를 완전히 비웁니다.
 
 ```text
