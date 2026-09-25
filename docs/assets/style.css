@@ -1,13 +1,13 @@
 :root {
-  --bg: #eef1f8;
-  --paper: #fcfdff;
-  --paper-soft: #f5f7fc;
+  --bg: #dfe3f2;
+  --paper: #fbfbff;
+  --paper-soft: #f0f2f9;
   --ink: #1b1d29;
   --muted: #6f7486;
-  --line: #d9deeb;
-  --accent: #5d63c8;
-  --accent-2: #4e9aae;
-  --accent-soft: #ececff;
+  --line: #cfd5e6;
+  --accent: #6956b8;
+  --accent-2: #3d94a8;
+  --accent-soft: #e9e3fb;
   --tip: #2f7d68;
   --warn: #9a6a00;
   --danger: #a44858;
@@ -22,10 +22,14 @@ body {
   margin: 0;
   font-family: Inter, Pretendard, "Noto Sans KR", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   color: var(--ink);
-  background:
-    radial-gradient(circle at 12% 0%, rgba(93, 99, 200, .13), transparent 30%),
-    radial-gradient(circle at 88% 4%, rgba(78, 154, 174, .09), transparent 25%),
-    linear-gradient(180deg, #f7f8fc 0, var(--bg) 430px);
+  min-height: 100vh;
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(circle at 10% -4%, rgba(105, 86, 184, .30), transparent 34%),
+    radial-gradient(circle at 92% 10%, rgba(61, 148, 168, .22), transparent 30%),
+    radial-gradient(circle at 50% 72%, rgba(112, 118, 188, .10), transparent 44%),
+    linear-gradient(145deg, #ece9f7 0%, #dce6f1 48%, #e5e2f3 100%);
+  background-attachment: fixed;
   line-height: 1.72;
 }
 
@@ -37,7 +41,7 @@ code, pre { font-family: "Cascadia Code", "SFMono-Regular", Consolas, monospace;
   top: 0;
   z-index: 30;
   border-bottom: 1px solid rgba(217, 222, 235, .9);
-  background: rgba(247, 248, 252, .90);
+  background: rgba(235, 234, 247, .88);
   backdrop-filter: blur(14px);
 }
 .topbar-inner {
@@ -64,7 +68,7 @@ code, pre { font-family: "Cascadia Code", "SFMono-Regular", Consolas, monospace;
   width: 150px;
   height: 150px;
   border-radius: 999px;
-  background: radial-gradient(circle, rgba(93,99,200,.12), rgba(78,154,174,.05) 48%, transparent 70%);
+  background: radial-gradient(circle, rgba(105,86,184,.24), rgba(61,148,168,.10) 48%, transparent 72%);
   filter: blur(2px);
   pointer-events: none;
 }
@@ -113,7 +117,7 @@ code, pre { font-family: "Cascadia Code", "SFMono-Regular", Consolas, monospace;
   padding: 18px;
   border: 1px solid var(--line);
   border-radius: 18px;
-  background: rgba(252, 253, 255, .88);
+  background: rgba(251, 251, 255, .88);
   box-shadow: 0 10px 28px rgba(41, 47, 80, .05);
 }
 .toc-title { margin-bottom: 10px; font-size: 13px; font-weight: 900; color: var(--muted); }
