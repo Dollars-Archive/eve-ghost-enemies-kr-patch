@@ -30,6 +30,12 @@ Nintendo Switch판 **EVE ghost enemies** 비공식 한국어 패치입니다.
 
 >현재 **대부분의 주요 게임 화면과 게임 진행 관련 텍스트의 한국어화를 완료했습니다.**
 
+### 타이틀 화면
+
+>타이틀 메뉴를 한글화했습니다. (해당 스크린샷은 엔딩 후 나오는 타이틀 화면입니다)
+
+<img src="https://github.com/user-attachments/assets/7a13a019-3be5-4e06-8937-eb9c356a0582" width="80%" alt="스크린샷 2026-09-08 202746" />
+
 ### 대사 / 이벤트
 
 >스토리 대사 및 이벤트 텍스트의 **한글화 및 검수를 완료했습니다.**
@@ -45,18 +51,6 @@ Nintendo Switch판 **EVE ghost enemies** 비공식 한국어 패치입니다.
 <img src="https://github.com/user-attachments/assets/03046d21-54d7-438a-bf66-a283d3585545" width="80%" alt="스크린샷 2026-09-08 202947" />
 
 <img src="https://github.com/user-attachments/assets/ab64fcc9-4519-47df-8aa6-21417adf67dc" width="80%" alt="스크린샷 2026-09-08 203053" />
-
-### 타이틀 화면
-
->타이틀 메뉴를 한글화했습니다. (해당 스크린샷은 엔딩 후 나오는 타이틀 화면입니다)
-
-<img src="https://github.com/user-attachments/assets/7a13a019-3be5-4e06-8937-eb9c356a0582" width="80%" alt="스크린샷 2026-09-08 202746" />
-
-### 게임 시작 경고문
-
->게임 시작 시 표시되는 주의·경고문을 한글화했습니다.
-
-<img src="https://github.com/user-attachments/assets/0821e148-b069-4649-b0ef-d22153fe9aa8" width="80%" alt="image" />
 
 ### 지도 화면
 
