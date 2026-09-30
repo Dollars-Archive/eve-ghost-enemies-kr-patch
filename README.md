@@ -7,10 +7,22 @@ Nintendo Switch판 **EVE ghost enemies** 비공식 한국어 패치입니다.
 > [!TIP]
 > 설치 방법을 처음 보는 경우 GitHub의 `INSTALL.md` 원문보다 **[웹 설치 가이드](https://dollars-archive.github.io/eve-ghost-enemies-kr-patch/)**에서 보는 것을 권장합니다.
 
-## 지원 게임 버전
+## 게임 정보
 
-- **EVE ghost enemies 일본판**
-- **업데이트 1.02** (롬포지에서는 1.01 로 표시됩니다. 실제 게임 적용시에는 1.02로 뜸)
+| 항목 | 내용 |
+| --- | --- |
+| 원제 | EVE ghost enemies |
+| 플랫폼 | Nintendo Switch |
+| 장르 | 커맨드 선택식 어드벤처 |
+| 일본 발매일 | 2022년 6월 30일 |
+| CERO | C (15세 이상) |
+| 지원 판본 | Nintendo Switch 일본판 |
+| Title ID | `01007BE0160D6000` |
+| 패치 기준 업데이트 | 공식 Ver.1.02 (RomForge 표시 1.01) |
+
+> [!NOTE]
+> 패치에는 게임 본편이나 공식 업데이트 파일이 포함되어 있지 않습니다.  
+> **사용자가 직접 보유한 `01007BE0160D6000` 원본과 공식 Ver.1.02 업데이트가 필요합니다.**
 
 다른 버전에서는 정상 동작을 보장하지 않습니다.
 
