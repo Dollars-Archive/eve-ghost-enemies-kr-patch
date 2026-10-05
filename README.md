@@ -97,11 +97,11 @@ Nintendo Switch판 **EVE ghost enemies** 비공식 한국어 패치입니다.
 
 ## 이미지 번역
 
-상태: 확인 필요
+상태: 완료
 
 ## 동영상 자막
 
-상태: 확인 필요
+상태: 완료
 
 <!-- kr-patch:scope:v1:end -->
 
