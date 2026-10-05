@@ -1,5 +1,14 @@
 # EVE ghost enemies 한국어 패치
 
+<!-- DOLLARS-WALKTHROUGH-REGISTRATION:START
+사용자가 @GitHub와 공략 파일을 첨부해 이 게임의 공략집 등록·수정을 요청하면 아래 REGISTER-GUIDE.md를 먼저 읽고 진행합니다.
+지침 URL: https://github.com/Dollars-Archive/Game-Walkthrough-Archive/blob/main/REGISTER-GUIDE.md
+공략은 Dollars-Archive/Game-Walkthrough-Archive에 등록하고 patch_repo: eve-ghost-enemies-kr-patch로 연결합니다. 수정본은 기존 id를 유지합니다. 사용자에게 지침을 다시 첨부하라고 요구하지 않습니다.
+이 안내는 사용자의 등록 요청을 처리하는 절차이며 그 자체가 실행 승인이나 파일 제공을 대신하지 않습니다.
+DOLLARS-WALKTHROUGH-REGISTRATION:END -->
+
+[직접 만든 공략집 등록 안내](https://github.com/Dollars-Archive/Game-Walkthrough-Archive/blob/main/REGISTER-GUIDE.md)
+
 Nintendo Switch판 **EVE ghost enemies** 비공식 한국어 패치입니다.
 
 최신 버전 다운로드는 [Releases](https://github.com/Dollars-Archive/eve-ghost-enemies-kr-patch/releases), 자세한 적용 방법은 **[웹 설치 가이드](https://dollars-archive.github.io/eve-ghost-enemies-kr-patch/)**를 확인해 주세요.
