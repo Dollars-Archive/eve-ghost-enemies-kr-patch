@@ -7,18 +7,26 @@ Nintendo Switch판 **EVE ghost enemies** 비공식 한국어 패치입니다.
 > [!TIP]
 > 설치 방법을 처음 보는 경우 GitHub의 `INSTALL.md` 원문보다 **[웹 설치 가이드](https://dollars-archive.github.io/eve-ghost-enemies-kr-patch/)**에서 보는 것을 권장합니다.
 
+<!-- kr-patch:game-info:v1:start -->
 ## 게임 정보
 
 | 항목 | 내용 |
 | --- | --- |
+| 한글 제목 | EVE ghost enemies |
 | 원제 | EVE ghost enemies |
+| 시리즈 | EVE |
 | 플랫폼 | Nintendo Switch |
-| 장르 | 커맨드 선택식 어드벤처 |
+| 개발사 | El Dia |
+| 장르 | 커맨드 선택식 ADV |
+| 장르 상세 | 커맨드 선택식 어드벤처 |
 | 일본 발매일 | 2022년 6월 30일 |
+| 플레이타임 | 약 28.5시간 |
 | CERO | C (15세 이상) |
 | 지원 판본 | Nintendo Switch 일본판 |
 | Title ID | `01007BE0160D6000` |
 | 패치 기준 업데이트 | 공식 Ver.1.02 (RomForge 표시 1.01) |
+
+<!-- kr-patch:game-info:v1:end -->
 
 > [!NOTE]
 > 패치에는 게임 본편이나 공식 업데이트 파일이 포함되어 있지 않습니다.  
@@ -26,9 +34,14 @@ Nintendo Switch판 **EVE ghost enemies** 비공식 한국어 패치입니다.
 
 다른 버전에서는 정상 동작을 보장하지 않습니다.
 
-## 한국어화 범위
-
+<!-- kr-patch:scope:v1:start -->
 >현재 **대부분의 주요 게임 화면과 게임 진행 관련 텍스트의 한국어화를 완료했습니다.**
+
+<!-- 각 항목의 상태만 완료 / 일부 / 미작업 / 해당 없음 중 하나로 수정합니다. 기존 근거가 부족한 항목은 확인 필요로 남깁니다. -->
+
+## 타이틀 한글화
+
+상태: 완료
 
 ### 타이틀 화면
 
@@ -36,13 +49,9 @@ Nintendo Switch판 **EVE ghost enemies** 비공식 한국어 패치입니다.
 
 <img src="https://github.com/user-attachments/assets/7a13a019-3be5-4e06-8937-eb9c356a0582" width="80%" alt="스크린샷 2026-09-08 202746" />
 
-### 대사 / 이벤트
+## 메뉴·UI
 
->스토리 대사 및 이벤트 텍스트의 **한글화 및 검수를 완료했습니다.**
-
-<img src="https://github.com/user-attachments/assets/069fd5e2-0a5d-445a-a42a-c03eab7e2a74" width="80%" alt="스크린샷 2026-09-08 203611" />
-
-<img src="https://github.com/user-attachments/assets/b3479047-ebfa-442a-8646-c5ee4528f5f6" width="80%" alt="스크린샷 2026-09-08 203336" />
+상태: 완료
 
 ### 조사·행동 선택 메뉴
 
@@ -64,6 +73,18 @@ Nintendo Switch판 **EVE ghost enemies** 비공식 한국어 패치입니다.
 
 <img src="https://github.com/user-attachments/assets/039f5288-378a-41e8-a688-8049699d0d2a" width="80%" alt="스크린샷 2026-09-08 202758" />
 
+## 대사
+
+상태: 완료
+
+### 대사 / 이벤트
+
+>스토리 대사 및 이벤트 텍스트의 **한글화 및 검수를 완료했습니다.**
+
+<img src="https://github.com/user-attachments/assets/069fd5e2-0a5d-445a-a42a-c03eab7e2a74" width="80%" alt="스크린샷 2026-09-08 203611" />
+
+<img src="https://github.com/user-attachments/assets/b3479047-ebfa-442a-8646-c5ee4528f5f6" width="80%" alt="스크린샷 2026-09-08 203336" />
+
 ### 엔딩 후 특전
 
 > [!NOTE]
@@ -73,6 +94,16 @@ Nintendo Switch판 **EVE ghost enemies** 비공식 한국어 패치입니다.
 > **현재 `DESIRE remaster`의 별도 한국어화 계획은 없습니다.**
 
 <img src="https://github.com/user-attachments/assets/3f4bcc35-84be-423a-bc3b-6d76c20d3770" width="80%" alt="스크린샷 2026-09-08 204155" />
+
+## 이미지 번역
+
+상태: 확인 필요
+
+## 동영상 자막
+
+상태: 확인 필요
+
+<!-- kr-patch:scope:v1:end -->
 
 ## 다운로드
 
