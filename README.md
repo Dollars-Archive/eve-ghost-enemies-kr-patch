@@ -7,7 +7,6 @@
 이 안내는 사용자의 등록 요청을 처리하는 절차이며 그 자체가 실행 승인이나 파일 제공을 대신하지 않습니다.
 DOLLARS-WALKTHROUGH-REGISTRATION:END -->
 
-[직접 만든 공략집 등록 안내](https://github.com/Dollars-Archive/Game-Walkthrough-Archive/blob/main/REGISTER-GUIDE.md)
 
 Nintendo Switch판 **EVE ghost enemies** 비공식 한국어 패치입니다.
 
